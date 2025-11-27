@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-23 00:51-0700\n"
+"POT-Creation-Date: 2025-11-27 14:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-#: system/ui/widgets/html_render.py:263 system/ui/widgets/confirm_dialog.py:93
-#: selfdrive/ui/layouts/sidebar.py:127
-#, python-format
-msgid "OK"
-msgstr ""
-
-#: system/ui/widgets/confirm_dialog.py:23 system/ui/widgets/option_dialog.py:35
-#: system/ui/widgets/keyboard.py:81 system/ui/widgets/network.py:318
-#, python-format
-msgid "Cancel"
-msgstr ""
-
-#: system/ui/widgets/option_dialog.py:36
-#, python-format
-msgid "Select"
-msgstr ""
 
 #: system/ui/widgets/network.py:74 system/ui/widgets/network.py:95
 #, python-format
@@ -115,76 +98,507 @@ msgstr ""
 msgid "Hidden Network"
 msgstr ""
 
-#: system/ui/widgets/network.py:155 selfdrive/ui/layouts/sidebar.py:73
-#: selfdrive/ui/layouts/sidebar.py:134 selfdrive/ui/layouts/sidebar.py:136
-#: selfdrive/ui/layouts/sidebar.py:138
+#: system/ui/widgets/network.py:155
 #, python-format
 msgid "CONNECT"
 msgstr ""
 
-#: system/ui/widgets/network.py:204
+#: system/ui/widgets/network.py:212
 #, python-format
 msgid "Enter APN"
 msgstr ""
 
-#: system/ui/widgets/network.py:204
+#: system/ui/widgets/network.py:212
 #, python-format
 msgid "leave blank for automatic configuration"
 msgstr ""
 
-#: system/ui/widgets/network.py:237 system/ui/widgets/network.py:314
+#: system/ui/widgets/network.py:245 system/ui/widgets/network.py:322
 #, python-format
 msgid "Enter password"
 msgstr ""
 
-#: system/ui/widgets/network.py:237 system/ui/widgets/network.py:314
+#: system/ui/widgets/network.py:245 system/ui/widgets/network.py:322
 #, python-format
 msgid "for \"{}\""
 msgstr ""
 
-#: system/ui/widgets/network.py:241
+#: system/ui/widgets/network.py:249
 #, python-format
 msgid "Enter SSID"
 msgstr ""
 
-#: system/ui/widgets/network.py:254
+#: system/ui/widgets/network.py:262
 #, python-format
 msgid "Enter new tethering password"
 msgstr ""
 
-#: system/ui/widgets/network.py:310
+#: system/ui/widgets/network.py:318
 #, python-format
 msgid "Scanning Wi-Fi networks..."
 msgstr ""
 
-#: system/ui/widgets/network.py:314
+#: system/ui/widgets/network.py:322
 #, python-format
 msgid "Wrong password"
 msgstr ""
 
-#: system/ui/widgets/network.py:318 system/ui/widgets/network.py:451
+#: system/ui/widgets/network.py:326 system/ui/widgets/network.py:459
 #, python-format
 msgid "Forget"
 msgstr ""
 
-#: system/ui/widgets/network.py:319
+#: system/ui/widgets/network.py:326 system/ui/widgets/confirm_dialog.py:23
+#: system/ui/widgets/option_dialog.py:35 system/ui/widgets/keyboard.py:81
+#, python-format
+msgid "Cancel"
+msgstr ""
+
+#: system/ui/widgets/network.py:327
 #, python-format
 msgid "Forget Wi-Fi Network \"{}\"?"
 msgstr ""
 
-#: system/ui/widgets/network.py:369
+#: system/ui/widgets/network.py:377
 #, python-format
 msgid "CONNECTING..."
 msgstr ""
 
-#: system/ui/widgets/network.py:373
+#: system/ui/widgets/network.py:381
 #, python-format
 msgid "FORGETTING..."
+msgstr ""
+
+#: system/ui/widgets/confirm_dialog.py:93 system/ui/widgets/html_render.py:263
+#, python-format
+msgid "OK"
+msgstr ""
+
+#: system/ui/widgets/option_dialog.py:36
+#, python-format
+msgid "Select"
 msgstr ""
 
 #: system/ui/widgets/list_view.py:123 system/ui/widgets/list_view.py:160
 #, python-format
 msgid "Error"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:39
+#, python-format
+msgid "Reset DP Settings"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:40
+#: selfdrive/ui/layouts/settings/device.py:66
+#, python-format
+msgid "RESET"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:41
+#, python-format
+msgid "Reset dragonpilot settings to default and restart the device."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:49
+#, python-format
+msgid "### Toyota / Lexus ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:52
+#, python-format
+msgid "Door Auto Lock/Unlock"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:53
+#, python-format
+msgid ""
+"Enable openpilot to auto-lock doors above 20 km/h and auto-unlock when "
+"shifting to Park."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:59
+#, python-format
+msgid "Enable TSS1 SnG Mod"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:66
+#, python-format
+msgid "Use Stock Longitudinal Control"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:73
+#, python-format
+msgid "### VAG ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:76
+#, python-format
+msgid "MQB A0 SnG Mod"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:83
+#, python-format
+msgid "PQ Steering Patch"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:90
+#, python-format
+msgid "Avoid EPS Lockout"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:97
+#, python-format
+msgid "### Mazda ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:100
+#, python-format
+msgid "### Lateral ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:103
+#, python-format
+msgid "Always-on Lane Keeping Assist (ALKA)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:104
+#, python-format
+msgid "Allows openpilot to always steer to keep the car in its lane."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:110
+#, python-format
+msgid "Lane Change Assist At:"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:111
+#, python-format
+msgid "Off = Disable LCA.<br>1 mph = 1.2 km/h."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:117
+#, python-format
+msgid " mph"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:118
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:130
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:184
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:199
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:241
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:253
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:261
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:273
+#, python-format
+msgid "Off"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:122
+#, python-format
+msgid "Auto Lane Change after:"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:123
+#, python-format
+msgid "Off = Disable Auto Lane Change."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:129
+#, python-format
+msgid " sec"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:135
+#, python-format
+msgid "Road Edge Detection (RED)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:136
+#, python-format
+msgid ""
+"Block lane change assist when the system detects the road edge.<br>NOTE: "
+"This will show 'Car Detected in Blindspot' warning."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:142
+#, python-format
+msgid "### Longitudinal ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:145
+#, python-format
+msgid "Use External Radar"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:146
+#, python-format
+msgid ""
+"See https://github.com/eFiniLan/openpilot-ext-radar-addon for more "
+"information."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:152
+#, python-format
+msgid "Enable Adaptive Coasting Mode (ACM)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:153
+#, python-format
+msgid ""
+"Adaptive Coasting Mode (ACM) reduces braking to allow smoother coasting when "
+"appropriate."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:159
+#, python-format
+msgid "Adaptive Experimental Mode (AEM)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:160
+#, python-format
+msgid ""
+"Adaptive mode switcher between ACC and Blended based on driving context."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:166
+#, python-format
+msgid "Dynamic Turn Speed Control (DTSC)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:167
+#, python-format
+msgid ""
+"DTSC automatically adjusts the vehicle's predicted speed based on upcoming "
+"road curvature and grip conditions.<br>Originally from the openpilot TACO "
+"branch."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:173
+#, python-format
+msgid "### UI ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:176
+#, python-format
+msgid "Hide HUD When Moves above:"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:177
+#, python-format
+msgid ""
+"To prevent screen burn-in, hide Speed, MAX Speed, and Steering/DM Icons when "
+"the car moves.<br>Off = Stock Behavior<br>1 km/h = 0.6 mph"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:180
+#, python-format
+msgid " km/h"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:188
+#, python-format
+msgid "Rainbow Driving Path like Tesla"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:189
+#, python-format
+msgid "Why not?"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:195
+#, python-format
+msgid "Display Lead Stats"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:196
+#, python-format
+msgid ""
+"Display the statistics of lead car and/or radar tracking points.<br>Lead: "
+"Lead stats only<br>Radar: Radar tracking point stats only<br>All: Lead and "
+"Radar stats<br>NOTE: Radar option only works on certain vehicle models."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:199
+#, python-format
+msgid "Lead"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:199
+#, python-format
+msgid "Radar"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:199
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:261
+#, python-format
+msgid "All"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:203
+#, python-format
+msgid "### Device ###"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:207
+#, python-format
+msgid "Enable Right-Hand Drive Mode"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:208
+#, python-format
+msgid ""
+"Allow openpilot to obey right-hand traffic conventions on right driver seat."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:214
+#, python-format
+msgid "Disable Driver Monitoring"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:215
+#, python-format
+msgid "USE AT YOUR OWN RISK."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:221
+#, python-format
+msgid "Enable Beep (Warning)"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:222
+#, python-format
+msgid "Use Buzzer for audiable alerts."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:228
+#, python-format
+msgid "Display Mode"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:230
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:241
+#, python-format
+msgid "Std."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:230
+#, python-format
+msgid "MAIN+"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:230
+#, python-format
+msgid "OP+"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:230
+#, python-format
+msgid "MAIN-"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:230
+#, python-format
+msgid "OP-"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:232
+#, python-format
+msgid ""
+"Std.: Stock behavior.<br>MAIN+: ACC MAIN on = Display ON.<br>OP+: OP enabled "
+"= Display ON.<br>MAIN-: ACC MAIN on = Display OFF<br>OP-: OP enabled = "
+"Display OFF."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:237
+#, python-format
+msgid "Audible Alert"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:238
+#, python-format
+msgid ""
+"Std.: Stock behaviour.<br>Warning: Only emits sound when there is a warning."
+"<br>Off: Does not emit any sound at all."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:241
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:245
+#, python-format
+msgid "Auto Shutdown After"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:246
+#, python-format
+msgid "0 mins = Immediately"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:252
+#, python-format
+msgid " mins"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:257
+#, python-format
+msgid "dashy"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:258
+#, python-format
+msgid ""
+"dashy - dragonpilot's all-in-one system hub for you.<br><br>Visit http://"
+"<device_ip>:5088 to access.<br><br>Off - Turn off dashy completely.<br>File: "
+"File Manager only.<br>All: File Manager + Live Stream."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:261
+#, python-format
+msgid "File"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:265
+#, python-format
+msgid "Delay Starting Loggerd for:"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:266
+#, python-format
+msgid ""
+"Delays the startup of loggerd and its related processes when the device goes "
+"on-road.<br>This prevents the initial moments of a drive from being "
+"recorded, protecting location privacy at the start of a trip."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:272
+#, python-format
+msgid " secs"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:277
+#, python-format
+msgid "Disable Comma Connect"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:278
+#, python-format
+msgid ""
+"Disable Comma connect service if you do not wish to upload / being tracked "
+"by the service."
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:291
+#, python-format
+msgid "Are you sure you want to reset ALL DP SETTINGS to default?"
+msgstr ""
+
+#: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:291
+#: selfdrive/ui/layouts/settings/device.py:163
+#, python-format
+msgid "Reset"
 msgstr ""
 
 #: selfdrive/ui/widgets/pairing_dialog.py:103
@@ -212,36 +626,29 @@ msgstr ""
 msgid "QR Code Error"
 msgstr ""
 
-#: selfdrive/ui/widgets/ssh_key.py:29
-msgid "LOADING"
-msgstr ""
-
-#: selfdrive/ui/widgets/ssh_key.py:30
-msgid "ADD"
-msgstr ""
-
-#: selfdrive/ui/widgets/ssh_key.py:31
-msgid "REMOVE"
-msgstr ""
-
-#: selfdrive/ui/widgets/ssh_key.py:89
+#: selfdrive/ui/widgets/offroad_alerts.py:104
 #, python-format
-msgid "Enter your GitHub username"
+msgid "Close"
 msgstr ""
 
-#: selfdrive/ui/widgets/ssh_key.py:114
+#: selfdrive/ui/widgets/offroad_alerts.py:106
 #, python-format
-msgid "No SSH keys found"
+msgid "Snooze Update"
 msgstr ""
 
-#: selfdrive/ui/widgets/ssh_key.py:123
+#: selfdrive/ui/widgets/offroad_alerts.py:109
 #, python-format
-msgid "Request timed out"
+msgid "Acknowledge Excessive Actuation"
 msgstr ""
 
-#: selfdrive/ui/widgets/ssh_key.py:126
+#: selfdrive/ui/widgets/offroad_alerts.py:112
 #, python-format
-msgid "No SSH keys found for user '{}'"
+msgid "Reboot and Update"
+msgstr ""
+
+#: selfdrive/ui/widgets/offroad_alerts.py:320
+#, python-format
+msgid "No release notes available."
 msgstr ""
 
 #: selfdrive/ui/widgets/prime.py:33
@@ -299,29 +706,36 @@ msgstr ""
 msgid "CHILL MODE ON"
 msgstr ""
 
-#: selfdrive/ui/widgets/offroad_alerts.py:104
-#, python-format
-msgid "Close"
+#: selfdrive/ui/widgets/ssh_key.py:29
+msgid "LOADING"
 msgstr ""
 
-#: selfdrive/ui/widgets/offroad_alerts.py:106
-#, python-format
-msgid "Snooze Update"
+#: selfdrive/ui/widgets/ssh_key.py:30
+msgid "ADD"
 msgstr ""
 
-#: selfdrive/ui/widgets/offroad_alerts.py:109
-#, python-format
-msgid "Acknowledge Excessive Actuation"
+#: selfdrive/ui/widgets/ssh_key.py:31
+msgid "REMOVE"
 msgstr ""
 
-#: selfdrive/ui/widgets/offroad_alerts.py:112
+#: selfdrive/ui/widgets/ssh_key.py:89
 #, python-format
-msgid "Reboot and Update"
+msgid "Enter your GitHub username"
 msgstr ""
 
-#: selfdrive/ui/widgets/offroad_alerts.py:320
+#: selfdrive/ui/widgets/ssh_key.py:114
 #, python-format
-msgid "No release notes available."
+msgid "No SSH keys found"
+msgstr ""
+
+#: selfdrive/ui/widgets/ssh_key.py:123
+#, python-format
+msgid "Request timed out"
+msgstr ""
+
+#: selfdrive/ui/widgets/ssh_key.py:126
+#, python-format
+msgid "No SSH keys found for user '{}'"
 msgstr ""
 
 #: selfdrive/ui/widgets/setup.py:19
@@ -344,7 +758,7 @@ msgstr ""
 msgid "Finish Setup"
 msgstr ""
 
-#: selfdrive/ui/widgets/setup.py:48 selfdrive/ui/layouts/settings/device.py:24
+#: selfdrive/ui/widgets/setup.py:48 selfdrive/ui/layouts/settings/device.py:27
 #, python-format
 msgid ""
 "Pair your device with comma connect (connect.comma.ai) and claim your comma "
@@ -362,87 +776,17 @@ msgstr ""
 msgid "Please connect to Wi-Fi to complete initial pairing"
 msgstr ""
 
-#: selfdrive/ui/layouts/home.py:155
+#: selfdrive/ui/layouts/home.py:156
 #, python-format
 msgid "UPDATE"
 msgstr ""
 
-#: selfdrive/ui/layouts/home.py:169
+#: selfdrive/ui/layouts/home.py:170
 #, python-format
 msgid "{} ALERT"
 msgid_plural "{} ALERTS"
 msgstr[0] ""
 msgstr[1] ""
-
-#: selfdrive/ui/layouts/sidebar.py:43
-msgid "--"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:44
-msgid "Wi-Fi"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:45
-msgid "ETH"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:46
-msgid "2G"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:47
-msgid "3G"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:48
-msgid "LTE"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:49
-msgid "5G"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:71 selfdrive/ui/layouts/sidebar.py:125
-#: selfdrive/ui/layouts/sidebar.py:127 selfdrive/ui/layouts/sidebar.py:129
-msgid "TEMP"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:71 selfdrive/ui/layouts/sidebar.py:125
-msgid "GOOD"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:72 selfdrive/ui/layouts/sidebar.py:144
-msgid "VEHICLE"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:72 selfdrive/ui/layouts/sidebar.py:136
-#: selfdrive/ui/layouts/sidebar.py:144
-msgid "ONLINE"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:73 selfdrive/ui/layouts/sidebar.py:134
-msgid "OFFLINE"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:117
-msgid "Unknown"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:129
-msgid "HIGH"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:138
-msgid "ERROR"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:142
-msgid "NO"
-msgstr ""
-
-#: selfdrive/ui/layouts/sidebar.py:142
-msgid "PANDA"
-msgstr ""
 
 #: selfdrive/ui/layouts/onboarding.py:111
 #, python-format
@@ -474,6 +818,64 @@ msgstr ""
 #: selfdrive/ui/layouts/onboarding.py:148
 #, python-format
 msgid "Decline, uninstall openpilot"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:43
+msgid "--"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:44
+msgid "Wi-Fi"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:45
+msgid "ETH"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:46
+msgid "2G"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:47
+msgid "3G"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:48
+msgid "LTE"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:49
+msgid "5G"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:71 selfdrive/ui/layouts/sidebar.py:126
+#: selfdrive/ui/layouts/sidebar.py:128 selfdrive/ui/layouts/sidebar.py:130
+msgid "TEMP"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:72 selfdrive/ui/layouts/sidebar.py:136
+#: selfdrive/ui/layouts/sidebar.py:138 selfdrive/ui/layouts/sidebar.py:140
+msgid "CPU"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:73 selfdrive/ui/layouts/sidebar.py:146
+msgid "VEHICLE"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:73 selfdrive/ui/layouts/sidebar.py:146
+msgid "ONLINE"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:117
+msgid "Unknown"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:144
+msgid "PANDA"
+msgstr ""
+
+#: selfdrive/ui/layouts/sidebar.py:144
+msgid "NO"
 msgstr ""
 
 #: selfdrive/ui/layouts/settings/firehose.py:18
@@ -530,64 +932,313 @@ msgstr ""
 msgid "INACTIVE: connect to an unmetered network"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:15
+#: selfdrive/ui/layouts/settings/device.py:28
 msgid ""
-"ADB (Android Debug Bridge) allows connecting to your device over USB or over "
-"the network. See https://docs.comma.ai/how-to/connect-to-comma for more info."
+"Preview the driver facing camera to ensure that driver monitoring has good "
+"visibility. (vehicle must be off)"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:19
+#: selfdrive/ui/layouts/settings/device.py:29
 msgid ""
-"Warning: This grants SSH access to all public keys in your GitHub settings. "
-"Never enter a GitHub username other than your own. A comma employee will "
-"NEVER ask you to add their GitHub username."
+"openpilot requires the device to be mounted within 4° left or right and "
+"within 5° up or 9° down."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:23
+#: selfdrive/ui/layouts/settings/device.py:30
+msgid "Review the rules, features, and limitations of openpilot"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:48
+#, python-format
+msgid "Vehicle Model"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:48
+#: selfdrive/ui/layouts/settings/software.py:61
+#, python-format
+msgid "SELECT"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:49
+#: selfdrive/ui/layouts/settings/device.py:260
+#: selfdrive/ui/layouts/settings/device.py:277
+#: selfdrive/ui/layouts/settings/device.py:280
+#: selfdrive/ui/layouts/settings/device.py:290
+#: selfdrive/ui/layouts/settings/device.py:293
+#, python-format
+msgid "[AUTO DETECT]"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:62
+#, python-format
+msgid "Pair Device"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:62
+#, python-format
+msgid "PAIR"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:66
+#, python-format
+msgid "Reset Calibration"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:71
+#: selfdrive/ui/layouts/settings/device.py:221
+#, python-format
+msgid "Reboot"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:71
+#: selfdrive/ui/layouts/settings/device.py:233
+#, python-format
+msgid "Power Off"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:75
+#, python-format
+msgid "On/Off Road"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:76
+#: selfdrive/ui/layouts/settings/device.py:332
+#, python-format
+msgid "Go Offroad"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:77
+#, python-format
 msgid ""
-"<b>WARNING: openpilot longitudinal control is in alpha for this car and will "
-"disable Automatic Emergency Braking (AEB).</b><br><br>On this car, openpilot "
-"defaults to the car's built-in ACC instead of openpilot's longitudinal "
-"control. Enable this to switch to openpilot longitudinal control. Enabling "
-"Experimental mode is recommended when enabling openpilot longitudinal "
-"control alpha. Changing this setting will restart openpilot if the car is "
-"powered on."
+"Force openpilot to go into onroad/offroad state.<br>(e.g. for update purpose)"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:39
+#: selfdrive/ui/layouts/settings/device.py:84
 #, python-format
-msgid "Enable ADB"
+msgid "Dongle ID"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:48
+#: selfdrive/ui/layouts/settings/device.py:84
+#: selfdrive/ui/layouts/settings/device.py:85
 #, python-format
-msgid "Enable SSH"
+msgid "N/A"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:53
+#: selfdrive/ui/layouts/settings/device.py:85
 #, python-format
-msgid "SSH Keys"
+msgid "Serial"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:56
+#: selfdrive/ui/layouts/settings/device.py:88
 #, python-format
-msgid "Joystick Debug Mode"
+msgid "SecOCKey Install"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:64
+#: selfdrive/ui/layouts/settings/device.py:89
+#: selfdrive/ui/layouts/settings/software.py:53
+#: selfdrive/ui/layouts/settings/software.py:136
 #, python-format
-msgid "Longitudinal Maneuver Mode"
+msgid "INSTALL"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:71
+#: selfdrive/ui/layouts/settings/device.py:90
 #, python-format
-msgid "openpilot Longitudinal Control (Alpha)"
+msgid "Not Installed"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/developer.py:166
-#: selfdrive/ui/layouts/settings/toggles.py:228
+#: selfdrive/ui/layouts/settings/device.py:96
 #, python-format
-msgid "Enable"
+msgid "Driver Camera"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:97
+#, python-format
+msgid "PREVIEW"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:104
+#, python-format
+msgid "Review Training Guide"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:105
+#, python-format
+msgid "REVIEW"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:110
+#, python-format
+msgid "Regulatory"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:110
+#, python-format
+msgid "VIEW"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:111
+#, python-format
+msgid "Change Language"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:111
+#, python-format
+msgid "CHANGE"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:135
+#, python-format
+msgid "Select a language"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:147
+#, python-format
+msgid "Disengage to Reset Calibration"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:163
+#, python-format
+msgid "Are you sure you want to reset calibration?"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:177
+#, python-format
+msgid " Your device is pointed {:.1f}° {} and {:.1f}° {}."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:178
+#, python-format
+msgid "down"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:178
+#, python-format
+msgid "up"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:178
+#, python-format
+msgid "left"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:178
+#, python-format
+msgid "right"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:191
+#, python-format
+msgid "<br><br>Steering lag calibration is {}% complete."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:193
+#, python-format
+msgid "<br><br>Steering lag calibration is complete."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:203
+#, python-format
+msgid " Steering torque response calibration is {}% complete."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:205
+#, python-format
+msgid " Steering torque response calibration is complete."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:211
+#, python-format
+msgid ""
+"openpilot is continuously calibrating, resetting is rarely required. "
+"Resetting calibration will restart openpilot if the car is powered on."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:218
+#, python-format
+msgid "Disengage to Reboot"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:221
+#, python-format
+msgid "Are you sure you want to reboot?"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:230
+#, python-format
+msgid "Disengage to Power Off"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:233
+#, python-format
+msgid "Are you sure you want to power off?"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:265
+#, python-format
+msgid "Vehicle Model list not found."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:271
+#, python-format
+msgid "Vehicle Model list is not a valid format."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:300
+#, python-format
+msgid "Select a Make"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:318
+#, python-format
+msgid "Select a Model"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:332
+#, python-format
+msgid "Go Onroad"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:334
+#, python-format
+msgid "Are you sure you want to switch?"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:334
+#, python-format
+msgid "CONFIRM"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:401
+#, python-format
+msgid "Key cannot be empty."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:404
+#, python-format
+msgid "Key must be exactly 32 characters long. Current length: {} characters."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:407
+#, python-format
+msgid ""
+"Invalid key format. Key must contain only hexadecimal characters (0-9, a-f)."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:414
+#, python-format
+msgid ""
+"Success!\n"
+"Restart comma to have openpilot use the key"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:418
+#, python-format
+msgid "Enter your Car Security Key"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/device.py:418
+#, python-format
+msgid "Archived key: \"{}\""
 msgstr ""
 
 #: selfdrive/ui/layouts/settings/software.py:20
@@ -649,20 +1300,9 @@ msgstr ""
 msgid "Install Update"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/software.py:53
-#: selfdrive/ui/layouts/settings/software.py:136
-#, python-format
-msgid "INSTALL"
-msgstr ""
-
 #: selfdrive/ui/layouts/settings/software.py:61
 #, python-format
 msgid "Target Branch"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/software.py:61
-#, python-format
-msgid "SELECT"
 msgstr ""
 
 #: selfdrive/ui/layouts/settings/software.py:72
@@ -711,237 +1351,41 @@ msgstr ""
 msgid "Select a branch"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/device.py:25
-msgid ""
-"Preview the driver facing camera to ensure that driver monitoring has good "
-"visibility. (vehicle must be off)"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:26
-msgid ""
-"openpilot requires the device to be mounted within 4° left or right and "
-"within 5° up or 9° down."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:27
-msgid "Review the rules, features, and limitations of openpilot"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:48
-#, python-format
-msgid "Pair Device"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:48
-#, python-format
-msgid "PAIR"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:51
-#, python-format
-msgid "Reset Calibration"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:51
-#, python-format
-msgid "RESET"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:55
-#: selfdrive/ui/layouts/settings/device.py:175
-#, python-format
-msgid "Reboot"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:55
-#: selfdrive/ui/layouts/settings/device.py:187
-#, python-format
-msgid "Power Off"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:59
-#, python-format
-msgid "Dongle ID"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:59
-#: selfdrive/ui/layouts/settings/device.py:60
-#, python-format
-msgid "N/A"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:60
-#, python-format
-msgid "Serial"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:62
-#, python-format
-msgid "Driver Camera"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:62
-#, python-format
-msgid "PREVIEW"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:65
-#, python-format
-msgid "Review Training Guide"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:65
-#, python-format
-msgid "REVIEW"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:67
-#, python-format
-msgid "Regulatory"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:67
-#, python-format
-msgid "VIEW"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:68
-#, python-format
-msgid "Change Language"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:68
-#, python-format
-msgid "CHANGE"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:91
-#, python-format
-msgid "Select a language"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:103
-#, python-format
-msgid "Disengage to Reset Calibration"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:119
-#, python-format
-msgid "Are you sure you want to reset calibration?"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:119
-#, python-format
-msgid "Reset"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:133
-#, python-format
-msgid " Your device is pointed {:.1f}° {} and {:.1f}° {}."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:133
-#, python-format
-msgid "down"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:133
-#, python-format
-msgid "up"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:134
-#, python-format
-msgid "left"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:134
-#, python-format
-msgid "right"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:146
-#, python-format
-msgid "<br><br>Steering lag calibration is {}% complete."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:148
-#, python-format
-msgid "<br><br>Steering lag calibration is complete."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:158
-#, python-format
-msgid " Steering torque response calibration is {}% complete."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:160
-#, python-format
-msgid " Steering torque response calibration is complete."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:165
-#, python-format
-msgid ""
-"openpilot is continuously calibrating, resetting is rarely required. "
-"Resetting calibration will restart openpilot if the car is powered on."
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:172
-#, python-format
-msgid "Disengage to Reboot"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:175
-#, python-format
-msgid "Are you sure you want to reboot?"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:184
-#, python-format
-msgid "Disengage to Power Off"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/device.py:187
-#, python-format
-msgid "Are you sure you want to power off?"
-msgstr ""
-
-#: selfdrive/ui/layouts/settings/settings.py:62
+#: selfdrive/ui/layouts/settings/settings.py:63
 msgid "Device"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/settings.py:63
+#: selfdrive/ui/layouts/settings/settings.py:64
 msgid "Network"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/settings.py:64
+#: selfdrive/ui/layouts/settings/settings.py:65
 msgid "Toggles"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/settings.py:65
-msgid "Software"
-msgstr ""
-
 #: selfdrive/ui/layouts/settings/settings.py:66
-msgid "Firehose"
+msgid "Software"
 msgstr ""
 
 #: selfdrive/ui/layouts/settings/settings.py:67
 msgid "Developer"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:17
+#: selfdrive/ui/layouts/settings/settings.py:68
+msgid "Dp"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:18
 msgid ""
 "Use the openpilot system for adaptive cruise control and lane keep driver "
 "assistance. Your attention is required at all times to use this feature."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:20
+#: selfdrive/ui/layouts/settings/toggles.py:21
 msgid "When enabled, pressing the accelerator pedal will disengage openpilot."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:22
+#: selfdrive/ui/layouts/settings/toggles.py:23
 msgid ""
 "Standard is recommended. In aggressive mode, openpilot will follow lead cars "
 "closer and be more aggressive with the gas and brake. In relaxed mode "
@@ -949,99 +1393,147 @@ msgid ""
 "cycle through these personalities with your steering wheel distance button."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:27
+#: selfdrive/ui/layouts/settings/toggles.py:28
 msgid ""
 "Receive alerts to steer back into the lane when your vehicle drifts over a "
 "detected lane line without a turn signal activated while driving over 31 mph "
 "(50 km/h)."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:30
-msgid "Enable driver monitoring even when openpilot is not engaged."
+#: selfdrive/ui/layouts/settings/toggles.py:31
+msgid ""
+"The driver monitoring system can be toggled on/off, but long-term activation "
+"is recommended"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:31
+#: selfdrive/ui/layouts/settings/toggles.py:33
+msgid ""
+"Set how sensitive the driver distraction detection should be. Strict: Very "
+"sensitive, warns on minor distractions. Moderate: Balanced between "
+"sensitivity and false positives. Lenient: Only alerts on clear distractions. "
+"Off: Disable Driver Distraction Detection and Control."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:39
 msgid ""
 "Upload data from the driver facing camera and help improve the driver "
 "monitoring algorithm."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:32
+#: selfdrive/ui/layouts/settings/toggles.py:40
 msgid "Display speed in km/h instead of mph."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:33
+#: selfdrive/ui/layouts/settings/toggles.py:41
 msgid ""
 "Record and store microphone audio while driving. The audio will be included "
 "in the dashcam video in comma connect."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:46
+#: selfdrive/ui/layouts/settings/toggles.py:42
+msgid "Disable logging service"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:43
+msgid "Disable update service"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:56
 #, python-format
 msgid "Enable openpilot"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:52
+#: selfdrive/ui/layouts/settings/toggles.py:62
 #, python-format
 msgid "Experimental Mode"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:58
+#: selfdrive/ui/layouts/settings/toggles.py:68
 #, python-format
 msgid "Disengage on Accelerator Pedal"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:64
+#: selfdrive/ui/layouts/settings/toggles.py:74
 #, python-format
 msgid "Enable Lane Departure Warnings"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:70
+#: selfdrive/ui/layouts/settings/toggles.py:80
 #, python-format
 msgid "Always-On Driver Monitoring"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:76
+#: selfdrive/ui/layouts/settings/toggles.py:86
 #, python-format
 msgid "Record and Upload Driver Camera"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:82
+#: selfdrive/ui/layouts/settings/toggles.py:92
 #, python-format
 msgid "Record and Upload Microphone Audio"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:88
+#: selfdrive/ui/layouts/settings/toggles.py:98
 #, python-format
 msgid "Use Metric System"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:96
+#: selfdrive/ui/layouts/settings/toggles.py:104
+#, python-format
+msgid "Disable Logging"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:110
+#, python-format
+msgid "Disable Updates"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:118
 #, python-format
 msgid "Driving Personality"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:98
+#: selfdrive/ui/layouts/settings/toggles.py:120
 #, python-format
 msgid "Aggressive"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:98
+#: selfdrive/ui/layouts/settings/toggles.py:120
 #, python-format
 msgid "Standard"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:98
+#: selfdrive/ui/layouts/settings/toggles.py:120
 #, python-format
 msgid "Relaxed"
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:125
+#: selfdrive/ui/layouts/settings/toggles.py:128
+#, python-format
+msgid "Distraction Detection Level"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:130
+#, python-format
+msgid "Strict"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:130
+#, python-format
+msgid "Moderate"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:130
+#, python-format
+msgid "Lenient"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:163
 #, python-format
 msgid "Changing this setting will restart openpilot if the car is powered on."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:158
+#: selfdrive/ui/layouts/settings/toggles.py:202
 #, python-format
 msgid ""
 "openpilot defaults to driving in chill mode. Experimental mode enables alpha-"
@@ -1057,30 +1549,100 @@ msgid ""
 "corner."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:181
+#: selfdrive/ui/layouts/settings/toggles.py:225
 #, python-format
 msgid ""
 "Experimental mode is currently unavailable on this car since the car's stock "
 "ACC is used for longitudinal control."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:183
+#: selfdrive/ui/layouts/settings/toggles.py:227
 #, python-format
 msgid "openpilot longitudinal control may come in a future update."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:186
+#: selfdrive/ui/layouts/settings/toggles.py:230
 #, python-format
 msgid ""
 "An alpha version of openpilot longitudinal control can be tested, along with "
 "Experimental mode, on non-release branches."
 msgstr ""
 
-#: selfdrive/ui/layouts/settings/toggles.py:189
+#: selfdrive/ui/layouts/settings/toggles.py:233
 #, python-format
 msgid ""
 "Enable the openpilot longitudinal control (alpha) toggle to allow "
 "Experimental mode."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/toggles.py:279
+#: selfdrive/ui/layouts/settings/developer.py:173
+#, python-format
+msgid "Enable"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:20
+msgid ""
+"ADB (Android Debug Bridge) allows connecting to your device over USB or over "
+"the network. See https://docs.comma.ai/how-to/connect-to-comma for more info."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:24
+msgid ""
+"Warning: This grants SSH access to all public keys in your GitHub settings. "
+"Never enter a GitHub username other than your own. A comma employee will "
+"NEVER ask you to add their GitHub username."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:28
+msgid ""
+"<b>WARNING: openpilot longitudinal control is in alpha for this car and will "
+"disable Automatic Emergency Braking (AEB).</b><br><br>On this car, openpilot "
+"defaults to the car's built-in ACC instead of openpilot's longitudinal "
+"control. Enable this to switch to openpilot longitudinal control. Enabling "
+"Experimental mode is recommended when enabling openpilot longitudinal "
+"control alpha. Changing this setting will restart openpilot if the car is "
+"powered on."
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:45
+#, python-format
+msgid "Enable ADB"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:54
+#, python-format
+msgid "Enable SSH"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:59
+#, python-format
+msgid "SSH Keys"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:62
+#, python-format
+msgid "Joystick Debug Mode"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:70
+#, python-format
+msgid "Longitudinal Maneuver Mode"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:77
+#, python-format
+msgid "openpilot Longitudinal Control (Alpha)"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:91
+#, python-format
+msgid "Show Last Errors"
+msgstr ""
+
+#: selfdrive/ui/layouts/settings/developer.py:91
+#, python-format
+msgid "Show"
 msgstr ""
 
 #: selfdrive/ui/onroad/hud_renderer.py:148

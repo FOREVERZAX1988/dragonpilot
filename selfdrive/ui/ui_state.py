@@ -91,6 +91,8 @@ class UIState:
     # dp
     self.dp_ui_hide_hud_speed_ms: float = float(int(self.params.get("dp_ui_hide_hud_speed_kph") or 0) * 0.278)
 
+    self.always_on_dm = self.params.get_bool("AlwaysOnDM")
+
     # dp
     self.dp_ui_rainbow = self.params.get_bool("dp_ui_rainbow")
 

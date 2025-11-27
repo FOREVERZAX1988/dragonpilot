@@ -27,6 +27,8 @@ import importlib
 # Pre-register panda_main as panda before loading it
 if HARDWARE.get_device_type() == "tici" and not os.environ.get("TICI_TRES") == "1":
     target_mod = "panda_tici"
+elif os.environ.get("TICI_HW") == "1" and not os.environ.get("TICI_TRES") == "1":
+    target_mod = "panda_tici"
 else:
     target_mod = "panda"
 

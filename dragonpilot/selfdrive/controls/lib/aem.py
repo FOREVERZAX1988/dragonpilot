@@ -53,7 +53,7 @@ class AEM:
 
     # Stop sign/light detection
     if not self._active:
-      if not radar_msg.leadOne.status and len(model_msg.orientation.x) == len(model_msg.position.x) == ModelConstants.IDX_N and \
+      if len(model_msg.orientation.x) == len(model_msg.position.x) == ModelConstants.IDX_N and \
         model_msg.position.x[ModelConstants.IDX_N - 1] < np.interp(v_ego, SLOW_DOWN_BP, SLOW_DOWN_DIST):
         self._perform_experimental_mode()
 

@@ -63,9 +63,9 @@ class CarInterface(CarInterfaceBase):
       print("----------------------------------------------")
       print("dragonpilot: DSU_BYPASS detected!")
       print("----------------------------------------------")
-      # rick: breaks TOYOTA_AVALON_2019 model tests.
-      dsu_bypass = True
-      ret.flags |= ToyotaFlags.DSU_BYPASS.value
+      # rick - disable for now, breaks TOYOTA_AVALON_2019 model tests.
+      # dsu_bypass = True
+      # ret.flags |= ToyotaFlags.DSU_BYPASS.value
 
     if 0x23 in fingerprint[0]:
       print("----------------------------------------------")
@@ -93,7 +93,7 @@ class CarInterface(CarInterfaceBase):
       # https://engage.toyota.com/static/images/toyota_safety_sense/TSS_Applicability_Chart.pdf
       stop_and_go = candidate != CAR.TOYOTA_AVALON
 
-    elif candidate in (CAR.TOYOTA_RAV4_TSS2, CAR.TOYOTA_RAV4_TSS2_2022, CAR.TOYOTA_RAV4_TSS2_2023, CAR.TOYOTA_RAV4_PRIME, CAR.TOYOTA_SIENNA_4TH_GEN):
+    elif candidate in (CAR.TOYOTA_RAV4_TSS2, CAR.TOYOTA_RAV4_TSS2_2022, CAR.TOYOTA_RAV4_TSS2_2023, CAR.TOYOTA_RAV4_PRIME, CAR.TOYOTA_SIENNA_4TH_GEN, CAR.TOYOTA_WILDLANDER_PHEV):
       ret.lateralTuning.init('pid')
       ret.lateralTuning.pid.kiBP = [0.0]
       ret.lateralTuning.pid.kpBP = [0.0]
@@ -169,9 +169,7 @@ class CarInterface(CarInterfaceBase):
 
     ret.openpilotLongitudinalControl = ret.enableDsu or \
       candidate in (TSS2_CAR - RADAR_ACC_CAR) or \
-      bool(ret.flags & ToyotaFlags.DISABLE_RADAR.value) or \
-      sdsu_active or \
-        dsu_bypass
+      bool(ret.flags & ToyotaFlags.DISABLE_RADAR.value)
 
     if dp_params & structs.DPFlags.ToyotaStockLon:
       ret.openpilotLongitudinalControl = False

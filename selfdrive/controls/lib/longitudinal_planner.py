@@ -78,7 +78,7 @@ class LongitudinalPlanner:
     self.solverExecutionTime = 0.0
     self.acm = ACM()
     self.aem = AEM()
-    self.dtsc = DTSC(aggressiveness=1.0)
+    self.dtsc = DTSC(aggressiveness=0.8)
 
   @staticmethod
   def parse_model(model_msg):

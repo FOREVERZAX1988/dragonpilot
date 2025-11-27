@@ -99,7 +99,8 @@ touch prebuilt
 # dragonpilot customized
 find . -name '*.cc' -delete
 find selfdrive/ui/ -name '*.h' -delete
-find . -type d -name "tests" -exec rm -rf {} +
+# rick - some test codes are used in the code
+# find . -type d -name "tests" -exec rm -rf {} +
 find . -type d -name 'x86_64' -exec rm -rf {} +
 find . -type d -name 'Darwin' -exec rm -rf {} +
 rm -fr tinygrad_repo/docs/tinygrad_intro.pdf # 1.9M

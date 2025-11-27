@@ -5,13 +5,13 @@ Copyright (c) 2025, Rick Lan
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, and/or sublicense, 
+to use, copy, modify, merge, publish, distribute, and/or sublicense,
 for non-commercial purposes only, subject to the following conditions:
 
-- The above copyright notice and this permission notice shall be included in 
+- The above copyright notice and this permission notice shall be included in
   all copies or substantial portions of the Software.
-- Commercial use (e.g. use in a product, service, or activity intended to 
-  generate revenue) is prohibited without explicit written permission from 
+- Commercial use (e.g. use in a product, service, or activity intended to
+  generate revenue) is prohibited without explicit written permission from
   the copyright holder.
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -26,18 +26,23 @@ import threading
 AudibleAlert = car.CarControl.HUDControl.AudibleAlert
 
 class Beepd:
-  def __init__(self):
+  def __init__(self, test=False):
     self.current_alert = AudibleAlert.none
+    self._test = test
     self.enable_gpio()
 
   def enable_gpio(self):
     try:
+      if self._test:
+        print("enabling GPIO")
       subprocess.run("echo 42 | sudo tee /sys/class/gpio/export",
                      shell=True,
                      stderr=subprocess.DEVNULL,
                      stdout=subprocess.DEVNULL,
                      encoding='utf8')
     except Exception:
+      if self._test:
+        print("GPIO failed to enable")
       pass
     subprocess.run("echo \"out\" | sudo tee /sys/class/gpio/gpio42/direction",
                    shell=True,
@@ -54,18 +59,24 @@ class Beepd:
                    encoding='utf8')
 
   def engage(self):
+    if self._test:
+      print("beepd: engage")
     self._beep(True)
     time.sleep(0.05)
     self._beep(False)
 
   def disengage(self):
+    if self._test:
+      print("beepd: disengage")
     for _ in range(2):
       self._beep(True)
       time.sleep(0.01)
       self._beep(False)
       time.sleep(0.01)
 
-  def warning(self):
+  def prompt(self):
+    if self._test:
+      print("beepd: prompt")
     for _ in range(3):
       self._beep(True)
       time.sleep(0.01)
@@ -73,6 +84,8 @@ class Beepd:
       time.sleep(0.01)
 
   def warning_immediate(self):
+    if self._test:
+      print("beepd: warning_immediate")
     for _ in range(5):
       self._beep(True)
       time.sleep(0.01)
@@ -86,10 +99,12 @@ class Beepd:
     current_alert_played_once = self.current_alert == AudibleAlert.none
     if self.current_alert != new_alert and (new_alert != AudibleAlert.none or current_alert_played_once):
       self.current_alert = new_alert
-      # if new_alert == AudibleAlert.engage:
-      #   self.dispatch_beep(self.engage)
-      # if new_alert == AudibleAlert.disengage:
-      #   self.dispatch_beep(self.disengage)
+      if new_alert == AudibleAlert.engage:
+        self.dispatch_beep(self.engage)
+      if new_alert == AudibleAlert.disengage:
+        self.dispatch_beep(self.disengage)
+      if new_alert == AudibleAlert.prompt:
+        self.dispatch_beep(self.prompt)
       if new_alert == AudibleAlert.warningImmediate:
         self.dispatch_beep(self.warning_immediate)
 
@@ -111,17 +126,15 @@ class Beepd:
       if frame == 60:
         cs.selfdriveState.alertSound = AudibleAlert.prompt
       if frame == 80:
-        cs.selfdriveState.alertSound = AudibleAlert.disengage
-      if frame == 85:
-        cs.selfdriveState.alertSound = AudibleAlert.prompt
+        cs.selfdriveState.alertSound = AudibleAlert.warningImmediate
 
       pm.send("selfdriveState", cs)
       frame += 1
       rk.keep_time()
 
-  def beepd_thread(self, test=False):
-    if test:
-      threading.Thread(target=self.test_beepd_thread, daemon=True).start()
+  def beepd_thread(self):
+    if self._test:
+      threading.Thread(target=self.test_beepd_thread).start()
 
     sm = messaging.SubMaster(['selfdriveState'])
     rk = Ratekeeper(20)
@@ -132,8 +145,8 @@ class Beepd:
       rk.keep_time()
 
 def main():
-  s = Beepd()
-  s.beepd_thread(test=False)
+  s = Beepd(test=False)
+  s.beepd_thread()
 
 if __name__ == "__main__":
   main()

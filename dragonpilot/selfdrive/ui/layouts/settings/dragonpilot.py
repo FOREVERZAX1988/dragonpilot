@@ -180,7 +180,7 @@ class DragonpilotLayout(Widget):
       suffix=tr(" km/h"),
       min_val=0,
       max_val=120,
-      step=5,
+      step=1,
       special_value_text=tr("Off"),
     )
 
@@ -196,7 +196,7 @@ class DragonpilotLayout(Widget):
       description=lambda: tr("Display the statistics of lead car and/or radar tracking points.<br>Lead: Lead stats only<br>Radar: Radar tracking point stats only<br>All: Lead and Radar stats<br>NOTE: Radar option only works on certain vehicle models."),
       initial_index=int(self._params.get("dp_ui_lead") or 0),
       callback=lambda val: self._params.put("dp_ui_lead", val),
-      options=["Off", "Lead", "Radar", "All"]
+      options=[tr("Off"), tr("Lead"), tr("Radar"), tr("All")]
     )
 
   def _device_toggles(self):
@@ -227,7 +227,7 @@ class DragonpilotLayout(Widget):
     self._toggles["dp_ui_display_mode"] = text_spin_button_item(
       title=lambda: tr("Display Mode"),
       callback=lambda val: self._params.put("dp_ui_display_mode", val),
-      options=["Std.", "MAIN+", "OP+", "MAIN-", "OP-"],
+      options=[tr("Std."), tr("MAIN+"), tr("OP+"), tr("MAIN-"), tr("OP-")],
       initial_index=int(self._params.get("dp_ui_display_mode") or 0),
       description=lambda: tr("Std.: Stock behavior.<br>MAIN+: ACC MAIN on = Display ON.<br>OP+: OP enabled = Display ON.<br>MAIN-: ACC MAIN on = Display OFF<br>OP-: OP enabled = Display OFF."),
     )
@@ -238,7 +238,7 @@ class DragonpilotLayout(Widget):
         description=lambda: tr("Std.: Stock behaviour.<br>Warning: Only emits sound when there is a warning.<br>Off: Does not emit any sound at all."),
         initial_index=int(self._params.get("dp_dev_audible_alert_mode") or 0),
         callback=lambda val: self._params.put("dp_dev_audible_alert_mode", val),
-        options=["Std.", "Warning", "Off"],
+        options=[tr("Std."), tr("Warning"), tr("Off")],
       )
 
     self._toggles["dp_dev_auto_shutdown_in"] = spin_button_item(
@@ -285,7 +285,8 @@ class DragonpilotLayout(Widget):
       # Check engaged again in case it changed while the dialog was open
       if result != DialogResult.CONFIRM:
         return
-      self._params.put_bool_nonblocking("dp_dev_reset_conf", True)
+      self._params.put_bool("dp_dev_reset_conf", True)
+      self._params.put_bool("DoReboot", True)
 
     dialog = ConfirmDialog(tr("Are you sure you want to reset ALL DP SETTINGS to default?"), tr("Reset"))
     gui_app.set_modal_overlay(dialog, callback=reset_dp_conf)

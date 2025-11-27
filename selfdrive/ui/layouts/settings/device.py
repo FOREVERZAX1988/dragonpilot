@@ -1,4 +1,5 @@
 import os
+import re
 import math
 import json
 
@@ -19,6 +20,7 @@ from openpilot.system.ui.widgets.html_render import HtmlModal
 from openpilot.system.ui.widgets.list_view import text_item, button_item, dual_button_item
 from openpilot.system.ui.widgets.option_dialog import MultiOptionDialog
 from openpilot.system.ui.widgets.scroller import Scroller
+from openpilot.system.ui.widgets.keyboard import Keyboard
 
 # Description constants
 DESCRIPTIONS = {
@@ -27,6 +29,8 @@ DESCRIPTIONS = {
   'reset_calibration': tr_noop("openpilot requires the device to be mounted within 4° left or right and within 5° up or 9° down."),
   'review_guide': tr_noop("Review the rules, features, and limitations of openpilot"),
 }
+DATA_PARAMS_D_SECOCKEY_PATH = "/data/params/d/SecOCKey"
+CACHE_PARAMS_SECOCKEY_PATH = "/cache/params/SecOCKey"
 
 
 class DeviceLayout(Widget):
@@ -46,6 +50,9 @@ class DeviceLayout(Widget):
     self._dp_vehicle_selector_make_dialog: MultiOptionDialog | None = None
     self._dp_vehicle_selector_model_dialog: MultiOptionDialog | None = None
 
+    self._keyboard = Keyboard(max_text_size=64, min_text_size=8, show_password_toggle=True)
+    self._secoc_key = self._params.get("SecOCKey") or self._read_key_from_files()
+
     items = self._initialize_items()
     self._scroller = Scroller(items, line_separator=True, spacing=0)
 
@@ -55,15 +62,21 @@ class DeviceLayout(Widget):
     self._pair_device_btn = button_item(lambda: tr("Pair Device"), lambda: tr("PAIR"), lambda: tr(DESCRIPTIONS['pair_device']), callback=self._pair_device)
     self._pair_device_btn.set_visible(lambda: not ui_state.prime_state.is_paired())
 
-    self._reset_calib_btn = button_item(lambda: tr("Reset Calibration"), lambda: tr("RESET"), lambda: tr(DESCRIPTIONS['reset_calibration']),
-                                        callback=self._reset_calibration_prompt)
+    self._reset_calib_btn = button_item(
+      lambda: tr("Reset Calibration"), lambda: tr("RESET"), lambda: tr(DESCRIPTIONS['reset_calibration']), callback=self._reset_calibration_prompt
+    )
     self._reset_calib_btn.set_description_opened_callback(self._update_calib_description)
 
-    self._power_off_btn = dual_button_item(lambda: tr("Reboot"), lambda: tr("Power Off"),
-                                           left_callback=self._reboot_prompt, right_callback=self._power_off_prompt)
+    self._power_off_btn = dual_button_item(
+      lambda: tr("Reboot"), lambda: tr("Power Off"), left_callback=self._reboot_prompt, right_callback=self._power_off_prompt
+    )
 
-    self._dp_on_off_road_btn = button_item(lambda: tr("On/Off Road"), lambda: tr("Go Offroad"), lambda: tr("Force openpilot to go into onroad/offroad state.<br>(e.g. for update purpose)"),
-                                        callback=self._dp_on_off_road_prompt)
+    self._dp_on_off_road_btn = button_item(
+      lambda: tr("On/Off Road"),
+      lambda: tr("Go Offroad"),
+      lambda: tr("Force openpilot to go into onroad/offroad state.<br>(e.g. for update purpose)"),
+      callback=self._dp_on_off_road_prompt,
+    )
 
     items = [
       self._dp_vehicle_selector_btn,
@@ -71,11 +84,29 @@ class DeviceLayout(Widget):
       text_item(lambda: tr("Dongle ID"), self._params.get("DongleId") or (lambda: tr("N/A"))),
       text_item(lambda: tr("Serial"), self._params.get("HardwareSerial") or (lambda: tr("N/A"))),
       self._pair_device_btn,
-      button_item(lambda: tr("Driver Camera"), lambda: tr("PREVIEW"), lambda: tr(DESCRIPTIONS['driver_camera']),
-                  callback=self._show_driver_camera, enabled=ui_state.is_offroad and "LITE" not in os.environ),
+      button_item(
+        lambda: tr("SecOCKey Install"),
+        lambda: tr("INSTALL"),
+        lambda: self._secoc_key or tr("Not Installed"),
+        callback=self._install_secockey,
+        enabled=ui_state.is_offroad,
+      ),
       self._reset_calib_btn,
-      button_item(lambda: tr("Review Training Guide"), lambda: tr("REVIEW"), lambda: tr(DESCRIPTIONS['review_guide']),
-                  self._on_review_training_guide, enabled=ui_state.is_offroad),
+      button_item(
+        lambda: tr("Driver Camera"),
+        lambda: tr("PREVIEW"),
+        lambda: tr(DESCRIPTIONS['driver_camera']),
+        callback=self._show_driver_camera,
+        enabled=ui_state.is_offroad and "LITE" not in os.environ,
+      ),
+      self._reset_calib_btn,
+      button_item(
+        lambda: tr("Review Training Guide"),
+        lambda: tr("REVIEW"),
+        lambda: tr(DESCRIPTIONS['review_guide']),
+        self._on_review_training_guide,
+        enabled=ui_state.is_offroad,
+      ),
       regulatory_btn := button_item(lambda: tr("Regulatory"), lambda: tr("VIEW"), callback=self._on_regulatory, enabled=ui_state.is_offroad),
       button_item(lambda: tr("Change Language"), lambda: tr("CHANGE"), callback=self._show_language_dialog),
       self._power_off_btn,
@@ -100,8 +131,9 @@ class DeviceLayout(Widget):
         self._update_calib_description()
       self._select_language_dialog = None
 
-    self._select_language_dialog = MultiOptionDialog(tr("Select a language"), multilang.languages, multilang.codes[multilang.language],
-                                                     option_font_weight=FontWeight.UNIFONT)
+    self._select_language_dialog = MultiOptionDialog(
+      tr("Select a language"), multilang.languages, multilang.codes[multilang.language], option_font_weight=FontWeight.CHINA
+    )
     gui_app.set_modal_overlay(self._select_language_dialog, callback=handle_language_selection)
 
   def _show_driver_camera(self):
@@ -142,8 +174,9 @@ class DeviceLayout(Widget):
         if calib.calStatus != log.LiveCalibrationData.Status.uncalibrated:
           pitch = math.degrees(calib.rpyCalib[1])
           yaw = math.degrees(calib.rpyCalib[2])
-          desc += tr(" Your device is pointed {:.1f}° {} and {:.1f}° {}.").format(abs(pitch), tr("down") if pitch > 0 else tr("up"),
-                                                                                  abs(yaw), tr("left") if yaw > 0 else tr("right"))
+          desc += tr(" Your device is pointed {:.1f}° {} and {:.1f}° {}.").format(
+            abs(pitch), tr("down") if pitch > 0 else tr("up"), abs(yaw), tr("left") if yaw > 0 else tr("right")
+          )
       except Exception:
         cloudlog.exception("invalid CalibrationParams")
 
@@ -174,8 +207,9 @@ class DeviceLayout(Widget):
         cloudlog.exception("invalid LiveTorqueParameters")
 
     desc += "<br><br>"
-    desc += tr("openpilot is continuously calibrating, resetting is rarely required. " +
-               "Resetting calibration will restart openpilot if the car is powered on.")
+    desc += tr(
+      "openpilot is continuously calibrating, resetting is rarely required. " + "Resetting calibration will restart openpilot if the car is powered on."
+    )
 
     self._reset_calib_btn.set_description(desc)
 
@@ -215,6 +249,7 @@ class DeviceLayout(Widget):
 
   def _on_review_training_guide(self):
     if not self._training_guide:
+
       def completed_callback():
         gui_app.set_modal_overlay(None)
 
@@ -299,3 +334,86 @@ class DeviceLayout(Widget):
     dialog = ConfirmDialog(tr("Are you sure you want to switch?"), tr("CONFIRM"))
     gui_app.set_modal_overlay(dialog, callback=on_off_road)
 
+  @staticmethod
+  def _is_key_valid(key: str) -> bool:
+    """Checks if the key is a valid 32-character lowercase hexadecimal string."""
+    if not isinstance(key, str):
+      return False
+
+    if len(key) != 32:
+      return False
+
+    pattern = r"^[0-9a-f]{32}$"
+    return bool(re.match(pattern, key))
+
+  @staticmethod
+  def _write_key_to_file(file_path: str, key: str) -> None:
+    """Writes the key to the specified file path."""
+    try:
+      with open(file_path, "w") as f:
+        f.write(key)
+    except Exception as e:
+      print(f"Error writing key to file {file_path}: {e}")
+
+  def _read_key_from_file(self, file_path: str) -> str | None:
+    if not os.path.exists(file_path):
+      return None
+
+    try:
+      with open(file_path, "r") as f:
+        key = f.read().strip()
+        if self._is_key_valid(key):
+          return key
+        else:
+          # Key is invalid, delete the file
+          try:
+            os.remove(file_path)
+            print(f"Deleted invalid key file: {file_path} which contained {key}")
+          except Exception as e:
+            print(f"Error deleting invalid key file {file_path}: {e}")
+          return None
+    except Exception as e:
+      print(f"Error reading key file {file_path}: {e}")
+      return None  # Return None on any error
+
+  def _read_key_from_files(self) -> str | None:
+    """Reads the key from the appropriate file(s) based on the AGNOS environment."""
+    data_params_d_secockey = self._read_key_from_file(DATA_PARAMS_D_SECOCKEY_PATH)
+    cache_params_secockey = self._read_key_from_file(CACHE_PARAMS_SECOCKEY_PATH)
+    existing_key = cache_params_secockey or data_params_d_secockey
+
+    if not existing_key:
+      return None
+
+    # Write the existing key to missing files
+    if data_params_d_secockey != existing_key:
+      self._write_key_to_file(DATA_PARAMS_D_SECOCKEY_PATH, existing_key)
+    if cache_params_secockey != existing_key:
+      self._write_key_to_file(CACHE_PARAMS_SECOCKEY_PATH, existing_key)
+
+    return existing_key
+
+  def _install_secockey(self):
+    def enter_secoc_key(result):
+      key = self._keyboard.text
+
+      if key == "":
+        gui_app.set_modal_overlay(alert_dialog(tr("Key cannot be empty.")))
+        return False
+      if len(key) != 32:
+        gui_app.set_modal_overlay(alert_dialog(tr("Key must be exactly 32 characters long. Current length: {} characters.").format(len(key))))
+        return False
+      if not self._is_key_valid(key):
+        gui_app.set_modal_overlay(alert_dialog(tr("Invalid key format. Key must contain only hexadecimal characters (0-9, a-f).")))
+        return False
+
+      self._secoc_key = key
+      self._params.put("SecOCKey", key)
+      self._write_key_to_file(DATA_PARAMS_D_SECOCKEY_PATH, key)
+      self._write_key_to_file(CACHE_PARAMS_SECOCKEY_PATH, key)
+      gui_app.set_modal_overlay(alert_dialog(tr("Success!\nRestart comma to have openpilot use the key")))
+
+    self._keyboard.reset(min_text_size=0)
+    self._keyboard.set_text(self._secoc_key or "")
+    self._keyboard.set_title(tr("Enter your Car Security Key"), tr("Archived key: \"{}\"").format(self._secoc_key))
+    gui_app.set_modal_overlay(self._keyboard, enter_secoc_key)

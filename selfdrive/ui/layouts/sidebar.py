@@ -68,9 +68,9 @@ class Sidebar(Widget):
     self._net_type = NETWORK_TYPES.get(NetworkType.none)
     self._net_strength = 0
 
-    self._temp_status = MetricData(tr_noop("TEMP"), tr_noop("GOOD"), Colors.GOOD)
+    self._temp_status = MetricData(tr_noop("TEMP"), "38°C", Colors.GOOD)
+    self._cpu_status = MetricData(tr_noop("CPU"), "10%", Colors.GOOD)
     self._panda_status = MetricData(tr_noop("VEHICLE"), tr_noop("ONLINE"), Colors.GOOD)
-    self._connect_status = MetricData(tr_noop("CONNECT"), tr_noop("OFFLINE"), Colors.WARNING)
     self._recording_audio = False
 
     self._home_img = gui_app.texture("images/button_home.png", HOME_BTN.width, HOME_BTN.height)
@@ -110,8 +110,7 @@ class Sidebar(Widget):
     self._recording_audio = ui_state.recording_audio
     self._update_network_status(device_state)
     self._update_temperature_status(device_state)
-    if not ui_state.dp_dev_disable_connect:
-      self._update_connection_status(device_state)
+    self._update_cpu_status(device_state)
     self._update_panda_status()
 
   def _update_network_status(self, device_state):
@@ -121,26 +120,28 @@ class Sidebar(Widget):
 
   def _update_temperature_status(self, device_state):
     thermal_status = device_state.thermalStatus
+    max_temp = device_state.maxTempC
 
     if thermal_status == ThermalStatus.green:
-      self._temp_status.update(tr_noop("TEMP"), tr_noop("GOOD"), Colors.GOOD)
+      self._temp_status.update(tr_noop("TEMP"), f"{max_temp:.1f}°C", Colors.GOOD)
     elif thermal_status == ThermalStatus.yellow:
-      self._temp_status.update(tr_noop("TEMP"), tr_noop("OK"), Colors.WARNING)
+      self._temp_status.update(tr_noop("TEMP"), f"{max_temp:.1f}°C", Colors.WARNING)
     else:
-      self._temp_status.update(tr_noop("TEMP"), tr_noop("HIGH"), Colors.DANGER)
+      self._temp_status.update(tr_noop("TEMP"), f"{max_temp:.1f}°C", Colors.DANGER)
 
-  def _update_connection_status(self, device_state):
-    last_ping = device_state.lastAthenaPingTime
-    if last_ping == 0:
-      self._connect_status.update(tr_noop("CONNECT"), tr_noop("OFFLINE"), Colors.WARNING)
-    elif time.monotonic_ns() - last_ping < 80_000_000_000:  # 80 seconds in nanoseconds
-      self._connect_status.update(tr_noop("CONNECT"), tr_noop("ONLINE"), Colors.GOOD)
+  def _update_cpu_status(self, device_state):
+    cpu_temp = max(device_state.cpuTempC, default=0.)
+
+    if cpu_temp >= 85:
+      self._cpu_status.update(tr_noop("CPU"), f"{cpu_temp:.1f}%", Colors.DANGER)
+    elif cpu_temp >= 65:
+      self._cpu_status.update(tr_noop("CPU"), f"{cpu_temp:.1f}%", Colors.WARNING)
     else:
-      self._connect_status.update(tr_noop("CONNECT"), tr_noop("ERROR"), Colors.DANGER)
+      self._cpu_status.update(tr_noop("CPU"), f"{cpu_temp:.1f}%", Colors.GOOD)
 
   def _update_panda_status(self):
     if ui_state.panda_type == log.PandaState.PandaType.unknown:
-      self._panda_status.update(tr_noop("NO"), tr_noop("PANDA"), Colors.DANGER)
+      self._panda_status.update(tr_noop("PANDA"), tr_noop("NO"), Colors.DANGER)
     else:
       self._panda_status.update(tr_noop("VEHICLE"), tr_noop("ONLINE"), Colors.GOOD)
 
@@ -201,9 +202,7 @@ class Sidebar(Widget):
     rl.draw_text_ex(self._font_regular, tr(self._net_type), text_pos, FONT_SIZE, 0, Colors.WHITE)
 
   def _draw_metrics(self, rect: rl.Rectangle):
-    metrics = [(self._temp_status, 338), (self._panda_status, 496)]
-    if not ui_state.dp_dev_disable_connect:
-      metrics.append((self._connect_status, 654))
+    metrics = [(self._temp_status, 338), (self._cpu_status, 496), (self._panda_status, 654)]
 
     for metric, y_offset in metrics:
       self._draw_metric(rect, metric, rect.y + y_offset)

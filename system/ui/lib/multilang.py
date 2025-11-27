@@ -17,6 +17,9 @@ LANGUAGES_FILE = os.path.join(TRANSLATIONS_DIR, "languages.json")
 UNIFONT_LANGUAGES = [
   "ar",
   "th",
+]
+
+CHINA_LANGUAGES = [
   "zh-CHT",
   "zh-CHS",
   "ko",
@@ -36,6 +39,10 @@ class Multilang:
   @property
   def language(self) -> str:
     return self._language
+
+  def requires_china(self) -> bool:
+    """Certain languages require china to render their glyphs."""
+    return self._language in CHINA_LANGUAGES
 
   def requires_unifont(self) -> bool:
     """Certain languages require unifont to render their glyphs."""
