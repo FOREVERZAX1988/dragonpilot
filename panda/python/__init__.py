@@ -156,6 +156,8 @@ class Panda:
     self._handle_open = False
     self.can_rx_overflow_buffer = b''
     self._can_speed_kbps = can_speed_kbps
+    # 初始化_bcd_hw_type属性，解决未定义问题
+    self._bcd_hw_type = None
 
     if cli and serial is None:
         self._connect_serial = self._cli_select_panda()
