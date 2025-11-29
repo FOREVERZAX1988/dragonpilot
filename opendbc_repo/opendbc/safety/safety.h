@@ -26,10 +26,7 @@
 #include "opendbc/safety/modes/elm327.h"
 #include "opendbc/safety/modes/body.h"
 #include "opendbc/safety/modes/psa.h"
-
-#ifdef CANFD
 #include "opendbc/safety/modes/hyundai_canfd.h"
-#endif
 
 uint32_t GET_BYTES(const CANPacket_t *msg, int start, int len) {
   uint32_t ret = 0U;
@@ -417,7 +414,6 @@ int set_safety_hooks(uint16_t mode, uint16_t param) {
     {SAFETY_ALLOUTPUT, &alloutput_hooks},
 #endif
   };
-
   // reset state set by safety mode
   safety_mode_cnt = 0U;
   relay_malfunction = false;
