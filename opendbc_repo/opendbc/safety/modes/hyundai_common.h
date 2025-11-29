@@ -86,7 +86,7 @@ void hyundai_common_init(uint16_t param) {
   hyundai_fcev_gas_signal = GET_FLAG(param, HYUNDAI_PARAM_FCEV_GAS);
   hyundai_alt_limits_2 = GET_FLAG(param, HYUNDAI_PARAM_ALT_LIMITS_2);
 
-  hyundai_escc = GET_FLAG(current_safety_param_sp, HYUNDAI_PARAM_SP_ESCC);
+  hyundai_escc = GET_FLAG(current_safety.param, HYUNDAI_PARAM_SP_ESCC);
   hyundai_longitudinal_main_cruise_toggleable = GET_FLAG(current_safety_param_sp, HYUNDAI_PARAM_SP_LONGITUDINAL_MAIN_CRUISE_TOGGLEABLE);
   hyundai_has_lda_button = GET_FLAG(current_safety_param_sp, HYUNDAI_PARAM_SP_HAS_LDA_BUTTON);
   hyundai_non_scc = GET_FLAG(current_safety_param_sp, HYUNDAI_PARAM_SP_NON_SCC);
