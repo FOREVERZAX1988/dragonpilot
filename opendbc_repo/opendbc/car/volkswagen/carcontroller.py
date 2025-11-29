@@ -4,7 +4,7 @@ from opendbc.car import Bus, DT_CTRL, structs
 from opendbc.car.lateral import apply_driver_steer_torque_limits
 from opendbc.car.common.conversions import Conversions as CV
 from opendbc.car.interfaces import CarControllerBase
-from opendbc.car.volkswagen import mqbcan, pqcan
+from opendbc.car.volkswagen import mlbcan, mqbcan, pqcan
 from opendbc.car.volkswagen.values import CanBus, CarControllerParams, VolkswagenFlags
 
 VisualAlert = structs.CarControl.HUDControl.VisualAlert
@@ -16,15 +16,22 @@ class CarController(CarControllerBase):
     super().__init__(dbc_names, CP)
     self.CCP = CarControllerParams(CP)
     self.CAN = CanBus(CP)
-    self.CCS = pqcan if CP.flags & VolkswagenFlags.PQ else mqbcan
     self.packer_pt = CANPacker(dbc_names[Bus.pt])
     self.aeb_available = not CP.flags & VolkswagenFlags.PQ
+
+    if CP.flags & VolkswagenFlags.PQ:
+      self.CCS = pqcan
+    elif CP.flags & VolkswagenFlags.MLB:
+      self.CCS = mlbcan
+    else:
+      self.CCS = mqbcan
 
     self.apply_torque_last = 0
     self.gra_acc_counter_last = None
     self.eps_timer_soft_disable_alert = False
     self.hca_frame_timer_running = 0
     self.hca_frame_same_torque = 0
+    #以下为DP新增
     self._dp_vag_a0_sng = bool(self.CP.flags & VolkswagenFlags.A0SnG)
     self.dp_vag_pq_steering_patch = 7 if CP.flags & VolkswagenFlags.PQSteeringPatch else 5
     self.dp_avoid_eps_lockout = CP.flags & VolkswagenFlags.AVOID_EPS_LOCKOUT
@@ -122,6 +129,7 @@ class CarController(CarControllerBase):
                                                        lead_distance, hud_control.leadDistanceBars))
 
     # **** Stock ACC Button Controls **************************************** #
+    #DP新增
     if self._dp_vag_a0_sng:
       if self.CP.pcmCruise and CS.gra_stock_values["COUNTER"] != self.gra_acc_counter_last:
         standing_resume_spam = CS.out.standstill
@@ -133,6 +141,7 @@ class CarController(CarControllerBase):
         if send_cancel or send_resume:
           can_sends.append(self.CCS.create_acc_buttons_control(self.packer_pt, self.CAN.ext, CS.gra_stock_values,
                                                                cancel=send_cancel, resume=send_resume))
+    #DP新增
     else:
       gra_send_ready = self.CP.pcmCruise and CS.gra_stock_values["COUNTER"] != self.gra_acc_counter_last
       if gra_send_ready and (CC.cruiseControl.cancel or CC.cruiseControl.resume):
