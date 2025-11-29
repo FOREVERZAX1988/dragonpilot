@@ -169,10 +169,22 @@ class VolkswagenFlags(IntFlag):
 
   # Static flags
   PQ = 2
+  MLB = 8
 
   A0SnG = 2 ** 10
   PQSteeringPatch = 2 ** 11
   AVOID_EPS_LOCKOUT = 2 ** 12
+
+##NEW ADD MLB
+@dataclass
+class VolkswagenMLBPlatformConfig(PlatformConfig):
+  dbc_dict: DbcDict = field(default_factory=lambda: {Bus.pt: 'vw_mlb'})
+  chassis_codes: set[str] = field(default_factory=set)
+  wmis: set[WMI] = field(default_factory=set)
+
+  def init(self):
+    self.flags |= VolkswagenFlags.MLB
+##NEW ADD MLB
 
 @dataclass
 class VolkswagenMQBPlatformConfig(PlatformConfig):
@@ -197,7 +209,7 @@ class VolkswagenCarSpecs(CarSpecs):
   steerRatio: float = 15.6
   minSteerSpeed: float = CarControllerParams.DEFAULT_MIN_STEER_SPEED
 
-
+##这里居然没MLB?
 class Footnote(Enum):
   KAMIQ = CarFootnote(
     "Not including the China market Kamiq, which is based on the (currently) unsupported PQ34 platform.",
@@ -334,6 +346,14 @@ class CAR(Platforms):
     chassis_codes={"A3"},
     wmis={WMI.VOLKSWAGEN_USA_CAR},
   )
+  ##NEW ADD MLB
+  AUDI_A4_MK4 = VolkswagenMLBPlatformConfig(
+    [VWCarDocs("Audi A4 B8.5 2012-15")],
+    VolkswagenCarSpecs(mass=1650, wheelbase=2.81),
+    chassis_codes={"8K"},
+    wmis={WMI.AUDI_GERMANY_CAR},
+  )
+  ##NEW ADD MLB
   VOLKSWAGEN_POLO_MK6 = VolkswagenMQBPlatformConfig(
     [
       VWCarDocs("Volkswagen Polo 2018-23", footnotes=[Footnote.VW_MQB_A0]),
@@ -427,6 +447,21 @@ class CAR(Platforms):
     chassis_codes={"5F"},
     wmis={WMI.SEAT},
   )
+
+  ##NEW ADD MLB
+  AUDI_Q5_MK1 = VolkswagenMLBPlatformConfig(
+    [VWCarDocs("Audi Q5 2013-17")],
+    VolkswagenCarSpecs(mass=1895, wheelbase=2.81),
+    chassis_codes={"8R"},
+    wmis={WMI.AUDI_EUROPE_MPV, WMI.AUDI_GERMANY_CAR},
+  )
+  PORSCHE_MACAN_MK1 = VolkswagenMLBPlatformConfig(
+    [VWCarDocs("Porsche Macan 2017-24")],
+    VolkswagenCarSpecs(mass=1895, wheelbase=2.81, steerRatio=16.2),
+    chassis_codes={"95", "A5"},
+    wmis={WMI.PORSCHE_SUV},
+  )
+  ##NEW ADD MLB
   SKODA_FABIA_MK4 = VolkswagenMQBPlatformConfig(
     [VWCarDocs("Škoda Fabia 2022-23", footnotes=[Footnote.VW_MQB_A0])],
     VolkswagenCarSpecs(mass=1266, wheelbase=2.56),
