@@ -20,6 +20,7 @@
 #include "opendbc/safety/modes/subaru_preglobal.h"
 #include "opendbc/safety/modes/mazda.h"
 #include "opendbc/safety/modes/nissan.h"
+#include "opendbc/safety/modes/volkswagen_mlb.h"
 #include "opendbc/safety/modes/volkswagen_mqb.h"
 #include "opendbc/safety/modes/volkswagen_pq.h"
 #include "opendbc/safety/modes/elm327.h"
@@ -386,6 +387,7 @@ static void reset_sample(struct sample_t *sample) {
   update_sample(sample, 0);
 }
 
+
 int set_safety_hooks(uint16_t mode, uint16_t param) {
   const safety_hook_config safety_hook_registry[] = {
     {SAFETY_SILENT, &nooutput_hooks},
@@ -406,12 +408,11 @@ int set_safety_hooks(uint16_t mode, uint16_t param) {
     {SAFETY_FORD, &ford_hooks},
     {SAFETY_RIVIAN, &rivian_hooks},
     {SAFETY_TESLA, &tesla_hooks},
-#ifdef CANFD
     {SAFETY_HYUNDAI_CANFD, &hyundai_canfd_hooks},
-#endif
 #ifdef ALLOW_DEBUG
     {SAFETY_PSA, &psa_hooks},
     {SAFETY_SUBARU_PREGLOBAL, &subaru_preglobal_hooks},
+    {SAFETY_VOLKSWAGEN_MLB, &volkswagen_mlb_hooks},
     {SAFETY_VOLKSWAGEN_PQ, &volkswagen_pq_hooks},
     {SAFETY_ALLOUTPUT, &alloutput_hooks},
 #endif
