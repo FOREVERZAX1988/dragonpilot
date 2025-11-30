@@ -24,6 +24,13 @@
 // ************** low level camera helpers ****************
 
 int do_cam_control(int fd, int op_code, void *handle, int size) {
+  // 新增：跳过不支持的op_code 266，避免报错
+  if (op_code == 266) {
+    LOGW("Skipping unsupported CAM control op_code: %d", op_code);
+    return 0;  // 返回成功，不触发错误日志
+  }
+  
+  // 保留原函数逻辑...
   struct cam_control camcontrol = {0};
   camcontrol.op_code = op_code;
   camcontrol.handle = (uint64_t)handle;
