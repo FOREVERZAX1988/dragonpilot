@@ -2,11 +2,13 @@ from opendbc.can import CANParser
 from opendbc.car import Bus, structs
 from opendbc.car.interfaces import CarStateBase
 from opendbc.car.common.conversions import Conversions as CV
-from opendbc.car.volkswagen.values import DBC, CanBus, NetworkLocation, TransmissionType, GearShifter, \
+from opendbc.car.volkswagen.values import CAR, DBC, CanBus, NetworkLocation, TransmissionType, GearShifter, \
                                                       CarControllerParams, VolkswagenFlags
+##NEW ADD
+import math  # 已添加，正确
 
+##NEW ADD
 ButtonType = structs.CarState.ButtonEvent.Type
-
 
 class CarState(CarStateBase):
   def __init__(self, CP):
@@ -241,7 +243,7 @@ class CarState(CarStateBase):
   #NEW ADD MLB
   def update_mlb(self, pt_cp, cam_cp, ext_cp) -> structs.CarState:
     ret = structs.CarState()
-    ret_sp = structs.CarStateSP()
+    #ret_sp = structs.CarStateSP()
 
     self.parse_wheel_speeds(ret,
       pt_cp.vl["ESP_03"]["ESP_VL_Radgeschw"],
@@ -289,11 +291,12 @@ class CarState(CarStateBase):
       ret.rightBlinker = bool(pt_cp.vl["Blinkmodi_01"]["BM_rechts"])
 
       ret.seatbeltUnlatched = pt_cp.vl["Airbag_02"]["AB_Gurtschloss_FA"] != 3
-      #ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
-      #                    pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
-      #                    pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
-      #                    pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
-
+      #暂时取消注释
+      ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
+      #暂时取消注释
     # Consume blind-spot monitoring info/warning LED states, if available.
     # Infostufe: BSM LED on, Warnung: BSM LED flashing
     if self.CP.enableBsm:
@@ -346,6 +349,8 @@ class CarState(CarStateBase):
       return CarState.get_can_parsers_pq(CP)
 
     # another case of the 1-50Hz
+    # 1. 初始化pt_messages为空列表（核心修复）
+    pt_messages = []
     cam_messages = []
    #NEW ADD MLB
     if not CP.flags & VolkswagenFlags.MLB:
@@ -364,10 +369,7 @@ class CarState(CarStateBase):
       ]
 
     return {
-      Bus.pt: CANParser(DBC[CP.carFingerprint][Bus.pt], [
-        # the 50->1Hz is currently too much for the CANParser to figure out
-        ("Blinkmodi_02", 1),  # From J519 BCM (sent at 1Hz when no lights active, 50Hz when active)
-      ], CanBus(CP).pt),
+      Bus.pt: CANParser(DBC[CP.carFingerprint][Bus.pt], pt_messages, CanBus(CP).pt),
       Bus.cam: CANParser(DBC[CP.carFingerprint][Bus.pt], cam_messages, CanBus(CP).cam),
     }
 
