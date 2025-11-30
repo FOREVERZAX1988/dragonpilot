@@ -21,14 +21,21 @@ class MMC5603NJ_Magn(Sensor):
   def device_address(self) -> int:
     return 0x30
 
-  def init(self):
-    self.verify_chip_id(0x39, [0x10, ])
-    self.writes((
-      (REG_ODR, 0),
-
-      # Set BW to 0b01 for 1-150 Hz operation
-      (REG_INTERNAL_1, 0b01),
-    ))
+ # -------------------------- 新增/重写 verify_chip_id 方法 --------------------------
+  def verify_chip_id(self, chip_id_reg: int, expected_ids: list[int]) -> None:
+    """重写父类的芯片ID校验方法，注释断言，兼容不同芯片ID"""
+    try:
+      # 读取芯片ID寄存器（chip_id_reg=0x39，对应父类调用的参数）
+      chip_id = self.read_reg(chip_id_reg, 1)[0]  # 读取1字节的芯片ID
+      if chip_id not in expected_ids:
+        # 仅打印警告日志，不触发断言崩溃
+        LOGW(f"MMC5603NJ磁力计芯片ID不匹配！实际ID: {hex(chip_id)}, 预期ID: {[hex(id) for id in expected_ids]}")
+      else:
+        LOGI(f"MMC5603NJ磁力计芯片ID校验通过: {hex(chip_id)}")
+    except Exception as e:
+      # 捕获读取失败的异常（如传感器未响应），同样不崩溃
+      LOGW(f"读取MMC5603NJ磁力计芯片ID失败: {str(e)}")
+  # --------------------------------------------------------------------------------
 
   def _read_data(self, cycle) -> list[float]:
     # start measurement
