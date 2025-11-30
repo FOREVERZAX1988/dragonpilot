@@ -28,7 +28,7 @@
 #include "opendbc/safety/modes/psa.h"
 
 #ifdef CANFD
-#include "opendbc/safety/modes/hyundai_canfd.h"
+//#include "opendbc/safety/modes/hyundai_canfd.h"
 #endif
 
 uint32_t GET_BYTES(const CANPacket_t *msg, int start, int len) {
