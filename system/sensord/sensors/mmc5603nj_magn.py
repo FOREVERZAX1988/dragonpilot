@@ -36,7 +36,13 @@ class MMC5603NJ_Magn(Sensor):
       # 捕获读取失败的异常（如传感器未响应），同样不崩溃
       LOGW(f"读取MMC5603NJ磁力计芯片ID失败: {str(e)}")
   # --------------------------------------------------------------------------------
-
+  def init(self):
+    # 此处调用的是上面重写后的verify_chip_id，不会再断言崩溃
+    self.verify_chip_id(0x39, [0x10, ])
+    self.writes((
+      (REG_ODR, 0),
+      (REG_INTERNAL_1, 0b01),  # BW=0b01 for 1-150 Hz
+    ))
   def _read_data(self, cycle) -> list[float]:
     # start measurement
     self.write(REG_INTERNAL_0, cycle)
