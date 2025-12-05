@@ -3,7 +3,11 @@
 // IRQs: USART2, USART3, UART5
 
 // ***************************** Definitions *****************************
+#ifdef STM32H7
 #define FIFO_SIZE_INT 0x400U
+#else
+#define FIFO_SIZE_INT 0x200U
+#endif
 
 typedef struct uart_ring {
   volatile uint16_t w_ptr_tx;

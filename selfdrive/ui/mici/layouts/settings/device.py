@@ -72,12 +72,19 @@ def _engaged_confirmation_callback(callback: Callable, action_text: str):
       # TODO: check
       icon = "icons_mici/settings/comma_icon.png"
 
-    dlg: BigConfirmationDialogV2 | BigDialog = BigConfirmationDialogV2(f"slide to\n{action_text.lower()}", icon, red=red,
+    action_text_key = {
+      "power off": tr("power off"),
+      "reboot": tr("reboot"),
+      "reset": tr("reset"),
+      "uninstall": tr("uninstall"),
+    }.get(action_text, action_text)
+
+    dlg: BigConfirmationDialogV2 | BigDialog = BigConfirmationDialogV2(tr(f"slide to\n{action_text_key.lower()}"), icon, red=red,
                                                                        exit_on_confirm=action_text == "reset",
                                                                        confirm_callback=confirm_callback)
     gui_app.set_modal_overlay(dlg)
   else:
-    dlg = BigDialog(f"Disengage to {action_text}", "")
+    dlg = BigDialog(tr(f"Disengage to {action_text}"), "")
     gui_app.set_modal_overlay(dlg)
 
 
@@ -91,11 +98,11 @@ class DeviceInfoLayoutMici(Widget):
     header_color = rl.Color(255, 255, 255, int(255 * 0.9))
     subheader_color = rl.Color(255, 255, 255, int(255 * 0.9 * 0.65))
     max_width = int(self._rect.width - 20)
-    self._dongle_id_label = MiciLabel("device ID", 48, width=max_width, color=header_color, font_weight=FontWeight.DISPLAY)
-    self._dongle_id_text_label = MiciLabel(params.get("DongleId") or 'N/A', 32, width=max_width, color=subheader_color, font_weight=FontWeight.ROMAN)
+    self._dongle_id_label = MiciLabel(tr("device ID"), 48, width=max_width, color=header_color, font_weight=FontWeight.DISPLAY)
+    self._dongle_id_text_label = MiciLabel(params.get("DongleId") or tr('N/A'), 32, width=max_width, color=subheader_color, font_weight=FontWeight.ROMAN)
 
-    self._serial_number_label = MiciLabel("serial", 48, color=header_color, font_weight=FontWeight.DISPLAY)
-    self._serial_number_text_label = MiciLabel(params.get("HardwareSerial") or 'N/A', 32, width=max_width, color=subheader_color, font_weight=FontWeight.ROMAN)
+    self._serial_number_label = MiciLabel(tr("serial"), 48, color=header_color, font_weight=FontWeight.DISPLAY)
+    self._serial_number_text_label = MiciLabel(params.get("HardwareSerial") or tr('N/A'), 32, width=max_width, color=subheader_color, font_weight=FontWeight.ROMAN)
 
   def _render(self, _):
     self._dongle_id_label.set_position(self._rect.x + 20, self._rect.y - 10)
@@ -119,18 +126,18 @@ class UpdaterState(IntEnum):
 
 class PairBigButton(BigButton):
   def __init__(self):
-    super().__init__("pair", "connect.comma.ai", "icons_mici/settings/comma_icon.png")
+    super().__init__(tr("pair"), tr("connect.comma.ai"), "icons_mici/settings/comma_icon.png")
 
   def _update_state(self):
     if ui_state.prime_state.is_paired():
-      self.set_text("paired")
+      self.set_text(tr("paired"))
       if ui_state.prime_state.is_prime():
-        self.set_value("subscribed")
+        self.set_value(tr("subscribed"))
       else:
-        self.set_value("upgrade to prime")
+        self.set_value(tr("upgrade to prime"))
     else:
-      self.set_text("pair")
-      self.set_value("connect.comma.ai")
+      self.set_text(tr("pair"))
+      self.set_value(tr("connect.comma.ai"))
 
   def _handle_mouse_release(self, mouse_pos: MousePos):
     super()._handle_mouse_release(mouse_pos)
@@ -156,7 +163,7 @@ class UpdateOpenpilotBigButton(BigButton):
     self._txt_update_icon = gui_app.texture("icons_mici/settings/device/update.png", 64, 64)
     self._txt_reboot_icon = gui_app.texture("icons_mici/settings/device/reboot.png", 64, 64)
     self._txt_up_to_date_icon = gui_app.texture("icons_mici/settings/device/up_to_date.png", 64, 64)
-    super().__init__("update openpilot", "", self._txt_update_icon)
+    super().__init__(tr("update openpilot"), "", self._txt_update_icon)
 
     self._waiting_for_updater_t: float | None = None
     self._hide_value_t: float | None = None
@@ -179,9 +186,9 @@ class UpdateOpenpilotBigButton(BigButton):
     self.set_icon(self._txt_update_icon)
 
     def run():
-      if self.get_value() == "download update":
+      if self.get_value() == tr("download update"):
         os.system("pkill -SIGHUP -f system.updated.updated")
-      elif self.get_value() == "update now":
+      elif self.get_value() == tr("update now"):
         ui_state.params.put_bool("DoReboot", True)
       else:
         os.system("pkill -SIGUSR1 -f system.updated.updated")
@@ -193,7 +200,7 @@ class UpdateOpenpilotBigButton(BigButton):
     if value:
       self.set_text("")
     else:
-      self.set_text("update openpilot")
+      self.set_text(tr("update openpilot"))
 
   def _update_state(self):
     if ui_state.started:
@@ -207,8 +214,8 @@ class UpdateOpenpilotBigButton(BigButton):
     if ui_state.params.get_bool("UpdateAvailable"):
       self.set_rotate_icon(False)
       self.set_enabled(True)
-      if self.get_value() != "update now":
-        self.set_value("update now")
+      if self.get_value() != tr("update now"):
+        self.set_value(tr("update now"))
         self.set_icon(self._txt_reboot_icon)
 
     elif self._state == UpdaterState.WAITING_FOR_UPDATER:
@@ -222,7 +229,7 @@ class UpdateOpenpilotBigButton(BigButton):
 
       if self._waiting_for_updater_t is not None and rl.get_time() - self._waiting_for_updater_t > UPDATER_TIMEOUT:
         self.set_rotate_icon(False)
-        self.set_value("updater failed to respond")
+        self.set_value(tr("updater failed to respond"))
         self._state = UpdaterState.IDLE
         self._hide_value_t = rl.get_time()
 
@@ -238,18 +245,18 @@ class UpdateOpenpilotBigButton(BigButton):
     elif self._state == UpdaterState.IDLE:
       self.set_rotate_icon(False)
       if failed:
-        if self.get_value() != "failed to update":
-          self.set_value("failed to update")
+        if self.get_value() != tr("failed to update"):
+          self.set_value(tr("failed to update"))
 
       elif ui_state.params.get_bool("UpdaterFetchAvailable"):
         self.set_enabled(True)
-        if self.get_value() != "download update":
-          self.set_value("download update")
+        if self.get_value() != tr("download update"):
+          self.set_value(tr("download update"))
 
       elif self._hide_value_t is not None:
         self.set_enabled(True)
-        if self.get_value() == "checking...":
-          self.set_value("up to date")
+        if self.get_value() == tr("checking..."):
+          self.set_value(tr("up to date"))
           self.set_icon(self._txt_up_to_date_icon)
 
         # Hide previous text after short amount of time (up to date or failed)
@@ -291,10 +298,10 @@ class DeviceLayoutMici(NavWidget):
     def uninstall_openpilot_callback():
       ui_state.params.put_bool("DoUninstall", True)
 
-    reset_calibration_btn = BigButton("reset calibration", "", "icons_mici/settings/device/lkas.png")
+    reset_calibration_btn = BigButton(tr("reset calibration"), "", "icons_mici/settings/device/lkas.png")
     reset_calibration_btn.set_click_callback(lambda: _engaged_confirmation_callback(reset_calibration_callback, "reset"))
 
-    uninstall_openpilot_btn = BigButton("uninstall openpilot", "", "icons_mici/settings/device/uninstall.png")
+    uninstall_openpilot_btn = BigButton(tr("uninstall openpilot"), "", "icons_mici/settings/device/uninstall.png")
     uninstall_openpilot_btn.set_click_callback(lambda: _engaged_confirmation_callback(uninstall_openpilot_callback, "uninstall"))
 
     reboot_btn = BigCircleButton("icons_mici/settings/device/reboot.png", red=False)
@@ -319,14 +326,14 @@ class DeviceLayoutMici(NavWidget):
     # lang_button = BigButton("change language", "", "icons_mici/settings/device/language.png")
     # lang_button.set_click_callback(language_callback)
 
-    regulatory_btn = BigButton("regulatory info", "", "icons_mici/settings/device/info.png")
+    regulatory_btn = BigButton(tr("regulatory info"), "", "icons_mici/settings/device/info.png")
     regulatory_btn.set_click_callback(self._on_regulatory)
 
-    driver_cam_btn = BigButton("driver camera preview", "", "icons_mici/settings/device/cameras.png")
+    driver_cam_btn = BigButton(tr("driver camera preview"), "", "icons_mici/settings/device/cameras.png")
     driver_cam_btn.set_click_callback(self._show_driver_camera)
     driver_cam_btn.set_enabled(lambda: ui_state.is_offroad())
 
-    review_training_guide_btn = BigButton("review training guide", "", "icons_mici/settings/device/info.png")
+    review_training_guide_btn = BigButton(tr("review training guide"), "", "icons_mici/settings/device/info.png")
     review_training_guide_btn.set_click_callback(self._on_review_training_guide)
     review_training_guide_btn.set_enabled(lambda: ui_state.is_offroad())
 

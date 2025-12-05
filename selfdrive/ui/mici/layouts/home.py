@@ -6,6 +6,7 @@ from collections.abc import Callable
 from openpilot.system.ui.widgets.label import gui_label, MiciLabel
 from openpilot.system.ui.widgets import Widget
 from openpilot.system.ui.lib.application import gui_app, FontWeight, DEFAULT_TEXT_COLOR, MousePos
+from openpilot.system.ui.lib.multilang import tr
 from openpilot.selfdrive.ui.ui_state import ui_state
 from openpilot.system.ui.text import wrap_text
 from openpilot.system.version import training_version
@@ -18,13 +19,13 @@ RELEASE_BRANCH = "release3"
 NetworkType = log.DeviceState.NetworkType
 
 NETWORK_TYPES = {
-  NetworkType.none: "Offline",
-  NetworkType.wifi: "WiFi",
-  NetworkType.cell2G: "2G",
-  NetworkType.cell3G: "3G",
-  NetworkType.cell4G: "LTE",
-  NetworkType.cell5G: "5G",
-  NetworkType.ethernet: "Ethernet",
+  NetworkType.none: tr("Offline"),
+  NetworkType.wifi: tr("WiFi"),
+  NetworkType.cell2G: tr("2G"),
+  NetworkType.cell3G: tr("3G"),
+  NetworkType.cell4G: tr("LTE"),
+  NetworkType.cell5G: tr("5G"),
+  NetworkType.ethernet: tr("Ethernet"),
 }
 
 
@@ -52,13 +53,13 @@ class DeviceStatus(Widget):
   def _update_state(self):
     # TODO: refresh function that can be called periodically, not at 60 fps, so we can update version
     # update system status
-    self._system_status = "SYSTEM READY ✓" if ui_state.panda_type != log.PandaState.PandaType.unknown else "BOOTING UP..."
+    self._system_status = tr("SYSTEM READY ✓") if ui_state.panda_type != log.PandaState.PandaType.unknown else tr("BOOTING UP...")
 
     # update network status
     strength = ui_state.sm['deviceState'].networkStrength.raw
     strength_text = "● " * strength + "○ " * (4 - strength)  # ◌ also works
     network_type = NETWORK_TYPES[ui_state.sm['deviceState'].networkType.raw]
-    self._network_status = f"{network_type} {strength_text}"
+    self._network_status = f"{tr(network_type)} {strength_text}"
 
   def _render(self, _):
     # draw status

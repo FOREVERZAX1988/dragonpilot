@@ -66,7 +66,7 @@ inline static std::unordered_map<std::string, ParamKeyAttributes> keys = {
     {"IsTakingSnapshot", {CLEAR_ON_MANAGER_START, BOOL}},
     {"IsTestedBranch", {CLEAR_ON_MANAGER_START, BOOL}},
     {"JoystickDebugMode", {CLEAR_ON_MANAGER_START | CLEAR_ON_OFFROAD_TRANSITION, BOOL}},
-    {"LanguageSetting", {PERSISTENT, STRING, "en"}},
+    {"LanguageSetting", {PERSISTENT, STRING, "zh-CHS"}},
     {"LastAthenaPingTime", {CLEAR_ON_MANAGER_START, INT}},
     {"LastGPSPosition", {PERSISTENT, STRING}},
     {"LastManagerExitReason", {CLEAR_ON_MANAGER_START, STRING}},
@@ -161,4 +161,8 @@ inline static std::unordered_map<std::string, ParamKeyAttributes> keys = {
     {"dp_vag_pq_steering_patch", {PERSISTENT, BOOL, "0"}},
     {"dp_vag_avoid_eps_lockout", {PERSISTENT, BOOL, "0"}},
     {"dp_ui_four", {PERSISTENT, BOOL, "0"}},
+
+
+    // 驾驶员监控灵敏度
+    {"DistractionDetectionLevel", {PERSISTENT, INT, "1"}},
 };

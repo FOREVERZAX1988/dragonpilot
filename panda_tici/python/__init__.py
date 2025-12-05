@@ -135,6 +135,7 @@ class Panda:
 
   F4_DEVICES = [HW_TYPE_WHITE_PANDA, HW_TYPE_GREY_PANDA, HW_TYPE_BLACK_PANDA, HW_TYPE_UNO, HW_TYPE_DOS]
   H7_DEVICES = [HW_TYPE_RED_PANDA, HW_TYPE_RED_PANDA_V2, HW_TYPE_TRES, HW_TYPE_CUATRO]
+  SUPPORTED_DEVICES = H7_DEVICES
 
   INTERNAL_DEVICES = (HW_TYPE_UNO, HW_TYPE_DOS, HW_TYPE_TRES, HW_TYPE_CUATRO)
   HAS_OBD = (HW_TYPE_BLACK_PANDA, HW_TYPE_UNO, HW_TYPE_DOS, HW_TYPE_RED_PANDA, HW_TYPE_RED_PANDA_V2, HW_TYPE_TRES, HW_TYPE_CUATRO)
@@ -243,6 +244,10 @@ class Panda:
     self._mcu_type = self.get_mcu_type()
     self.health_version, self.can_version, self.can_health_version = self.get_packets_versions()
     logger.debug("connected")
+
+    hw_type = self.get_type()
+    if hw_type not in self.SUPPORTED_DEVICES:
+      print("WARNING: Using deprecated HW")
 
     # disable openpilot's heartbeat checks
     if self._disable_checks:
@@ -452,6 +457,10 @@ class Panda:
     if self.up_to_date(fn=fn):
       logger.info("flash: already up to date")
       return
+
+    hw_type = self.get_type()
+    if hw_type not in self.SUPPORTED_DEVICES:
+      raise RuntimeError(f"HW type {hw_type.hex()} is deprecated and can no longer be flashed.")
 
     if not fn:
       fn = os.path.join(FW_PATH, self._mcu_type.config.app_fn)

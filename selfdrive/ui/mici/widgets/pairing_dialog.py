@@ -10,6 +10,7 @@ from openpilot.selfdrive.ui.ui_state import ui_state
 from openpilot.system.ui.widgets import NavWidget
 from openpilot.system.ui.lib.application import FontWeight, gui_app
 from openpilot.system.ui.widgets.label import MiciLabel
+from openpilot.system.ui.lib.multilang import tr
 
 
 class PairingDialog(NavWidget):
@@ -25,7 +26,7 @@ class PairingDialog(NavWidget):
     self._last_qr_generation = float("-inf")
 
     self._txt_pair = gui_app.texture("icons_mici/settings/device/pair.png", 84, 64)
-    self._pair_label = MiciLabel("pair with comma connect", 48, font_weight=FontWeight.BOLD,
+    self._pair_label = MiciLabel(tr("pair with comma connect"), 48, font_weight=FontWeight.BOLD,
                                  color=rl.Color(255, 255, 255, int(255 * 0.9)), line_height=40, wrap_text=True)
 
   def _get_pairing_url(self) -> str:
@@ -91,7 +92,7 @@ class PairingDialog(NavWidget):
     if not self._qr_texture:
       error_font = gui_app.font(FontWeight.BOLD)
       rl.draw_text_ex(
-        error_font, "QR Code Error", rl.Vector2(self._rect.x + 20, self._rect.y + self._rect.height // 2 - 15), 30, 0.0, rl.RED
+        error_font, tr("QR Code Error"), rl.Vector2(self._rect.x + 20, self._rect.y + self._rect.height // 2 - 15), 30, 0.0, rl.RED
       )
       return
 

@@ -6,6 +6,7 @@ from openpilot.system.ui.widgets.scroller import Scroller
 from openpilot.selfdrive.ui.mici.widgets.button import BigButton, BigToggle, BigParamControl
 from openpilot.selfdrive.ui.mici.widgets.dialog import BigDialog, BigInputDialog
 from openpilot.system.ui.lib.application import gui_app
+from openpilot.system.ui.lib.multilang import tr
 from openpilot.system.ui.widgets import NavWidget
 from openpilot.selfdrive.ui.layouts.settings.common import restart_needed_callback
 from openpilot.selfdrive.ui.ui_state import ui_state
@@ -29,32 +30,32 @@ class DeveloperLayoutMici(NavWidget):
 
     def ssh_keys_callback():
       github_username = ui_state.params.get("GithubUsername") or ""
-      dlg = BigInputDialog("enter GitHub username", github_username, confirm_callback=github_username_callback)
+      dlg = BigInputDialog(tr("enter GitHub username"), github_username, confirm_callback=github_username_callback)
       if not system_time_valid():
-        dlg = BigDialog("Please connect to Wi-Fi to fetch your key", "")
+        dlg = BigDialog(tr("Please connect to Wi-Fi to fetch your key"), "")
         gui_app.set_modal_overlay(dlg)
         return
       gui_app.set_modal_overlay(dlg)
 
     txt_ssh = gui_app.texture("icons_mici/settings/developer/ssh.png", 77, 44)
     github_username = ui_state.params.get("GithubUsername") or ""
-    self._ssh_keys_btn = BigButton("SSH keys", "Not set" if not github_username else github_username, icon=txt_ssh)
+    self._ssh_keys_btn = BigButton(tr("SSH keys"), tr("Not set") if not github_username else github_username, icon=txt_ssh)
     self._ssh_keys_btn.set_click_callback(ssh_keys_callback)
 
     # adb, ssh, ssh keys, debug mode, joystick debug mode, longitudinal maneuver mode, ip address
     # ******** Main Scroller ********
-    self._adb_toggle = BigParamControl("enable ADB", "AdbEnabled")
-    self._ssh_toggle = BigParamControl("enable SSH", "SshEnabled")
-    self._joystick_toggle = BigToggle("joystick debug mode",
+    self._adb_toggle = BigParamControl(tr("enable ADB"), "AdbEnabled")
+    self._ssh_toggle = BigParamControl(tr("enable SSH"), "SshEnabled")
+    self._joystick_toggle = BigToggle(tr("joystick debug mode"),
                                       initial_state=ui_state.params.get_bool("JoystickDebugMode"),
                                       toggle_callback=self._on_joystick_debug_mode)
-    self._long_maneuver_toggle = BigToggle("longitudinal maneuver mode",
+    self._long_maneuver_toggle = BigToggle(tr("longitudinal maneuver mode"),
                                            initial_state=ui_state.params.get_bool("LongitudinalManeuverMode"),
                                            toggle_callback=self._on_long_maneuver_mode)
-    self._alpha_long_toggle = BigToggle("alpha longitudinal",
+    self._alpha_long_toggle = BigToggle(tr("alpha longitudinal"),
                                         initial_state=ui_state.params.get_bool("AlphaLongitudinalEnabled"),
                                         toggle_callback=self._on_alpha_long_enabled)
-    self._debug_mode_toggle = BigParamControl("ui debug mode", "ShowDebugInfo",
+    self._debug_mode_toggle = BigParamControl(tr("ui debug mode"), "ShowDebugInfo",
                                               toggle_callback=lambda checked: (gui_app.set_show_touches(checked),
                                                                                gui_app.set_show_fps(checked)))
 

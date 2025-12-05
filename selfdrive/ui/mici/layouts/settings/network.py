@@ -10,6 +10,7 @@ from openpilot.system.ui.widgets.label import UnifiedLabel
 from openpilot.selfdrive.ui.mici.widgets.button import BigButton, BigMultiToggle, BigToggle
 from openpilot.selfdrive.ui.mici.widgets.dialog import BigMultiOptionDialog, BigInputDialog, BigDialogOptionButton, BigConfirmationDialogV2
 from openpilot.system.ui.lib.application import gui_app, MousePos, FontWeight
+from openpilot.system.ui.lib.multilang import tr
 from openpilot.system.ui.widgets import Widget, NavWidget
 from openpilot.system.ui.lib.wifi_manager import WifiManager, Network, SecurityType, MeteredType
 
@@ -188,7 +189,7 @@ class ForgetButton(Widget):
 
   def _handle_mouse_release(self, mouse_pos: MousePos):
     super()._handle_mouse_release(mouse_pos)
-    dlg = BigConfirmationDialogV2("slide to forget", "icons_mici/settings/network/new/trash.png", red=True,
+    dlg = BigConfirmationDialogV2(tr("slide to forget"), "icons_mici/settings/network/new/trash.png", red=True,
                                   confirm_callback=self._forget_network)
     gui_app.set_modal_overlay(dlg, callback=self._open_network_manage_page)
 
@@ -245,25 +246,25 @@ class NetworkInfoPage(NavWidget):
 
     self._connect_btn.set_full(not self._network.is_saved and not self._is_connecting)
     if self._is_connecting:
-      self._connect_btn.set_label("connecting...")
+      self._connect_btn.set_label(tr("connecting..."))
       self._connect_btn.set_enabled(False)
     elif self._network.is_connected:
-      self._connect_btn.set_label("connected")
+      self._connect_btn.set_label(tr("connected"))
       self._connect_btn.set_enabled(False)
     elif self._network.security_type == SecurityType.UNSUPPORTED:
-      self._connect_btn.set_label("connect")
+      self._connect_btn.set_label(tr("connect"))
       self._connect_btn.set_enabled(False)
     else:  # saved or unknown
-      self._connect_btn.set_label("connect")
+      self._connect_btn.set_label(tr("connect"))
       self._connect_btn.set_enabled(True)
 
     self._title.set_text(normalize_ssid(self._network.ssid))
     if self._network.security_type == SecurityType.OPEN:
-      self._subtitle.set_text("open")
+      self._subtitle.set_text(tr("open"))
     elif self._network.security_type == SecurityType.UNSUPPORTED:
-      self._subtitle.set_text("unsupported")
+      self._subtitle.set_text(tr("unsupported"))
     else:
-      self._subtitle.set_text("secured")
+      self._subtitle.set_text(tr("secured"))
 
   def set_current_network(self, network: Network):
     self._network = network
@@ -423,7 +424,7 @@ class WifiUIMici(BigMultiOptionDialog):
       self._on_need_auth(network.ssid, False)
 
   def _on_need_auth(self, ssid, incorrect_password=True):
-    hint = "incorrect password..." if incorrect_password else "enter password..."
+    hint = tr("incorrect password...") if incorrect_password else tr("enter password...")
     dlg = BigInputDialog(hint, "", minimum_length=8,
                          confirm_callback=lambda _password: self._connect_with_password(ssid, _password))
     # go back to the manage network page
@@ -468,7 +469,7 @@ class NetworkLayoutMici(NavWidget):
       self._network_metered_btn.set_enabled(False)
       self._wifi_manager.set_tethering_active(checked)
 
-    self._tethering_toggle_btn = BigToggle("enable tethering", "", toggle_callback=tethering_toggle_callback)
+    self._tethering_toggle_btn = BigToggle(tr("enable tethering"), "", toggle_callback=tethering_toggle_callback)
 
     def tethering_password_callback(password: str):
       if password:
@@ -476,16 +477,16 @@ class NetworkLayoutMici(NavWidget):
 
     def tethering_password_clicked():
       tethering_password = self._wifi_manager.tethering_password
-      dlg = BigInputDialog("enter password...", tethering_password, minimum_length=8,
+      dlg = BigInputDialog(tr("enter password..."), tethering_password, minimum_length=8,
                            confirm_callback=tethering_password_callback)
       gui_app.set_modal_overlay(dlg)
 
     txt_tethering = gui_app.texture(_tethering_icon, 64, 53)
-    self._tethering_password_btn = BigButton("tethering password", "", txt_tethering)
+    self._tethering_password_btn = BigButton(tr("tethering password"), "", txt_tethering)
     self._tethering_password_btn.set_click_callback(tethering_password_clicked)
 
     # ******** IP Address ********
-    self._ip_address_btn = BigButton("IP Address", "Not connected")
+    self._ip_address_btn = BigButton(tr("IP Address"), tr("Not connected"))
 
     # ******** Network Metered ********
     def network_metered_callback(value: str):
@@ -499,10 +500,10 @@ class NetworkLayoutMici(NavWidget):
 
     # TODO: signal for current network metered type when changing networks, this is wrong until you press it once
     # TODO: disable when not connected
-    self._network_metered_btn = BigMultiToggle("network usage", ["default", "metered", "unmetered"], select_callback=network_metered_callback)
+    self._network_metered_btn = BigMultiToggle(tr("network usage"), ["default", "metered", "unmetered"], select_callback=network_metered_callback)
     self._network_metered_btn.set_enabled(False)
 
-    wifi_button = BigButton("wi-fi")
+    wifi_button = BigButton(tr("wi-fi"))
     wifi_button.set_click_callback(lambda: self._switch_to_panel(NetworkPanelType.WIFI))
 
     # Main scroller ----------------------------------
@@ -536,7 +537,7 @@ class NetworkLayoutMici(NavWidget):
     self._tethering_toggle_btn.set_checked(tethering_active)
 
     # Update IP address
-    self._ip_address_btn.set_value(self._wifi_manager.ipv4_address or "Not connected")
+    self._ip_address_btn.set_value(self._wifi_manager.ipv4_address or tr("Not connected"))
 
     # Update network metered
     self._network_metered_btn.set_value(

@@ -106,6 +106,8 @@ class UIState:
     # dp
     self.dp_dev_disable_connect = self.params.get_bool("dp_dev_disable_connect")
 
+    self.always_on_dm = self.params.get_bool("AlwaysOnDM")
+
     self.update_params()
 
   def add_offroad_transition_callback(self, callback: Callable[[], None]):

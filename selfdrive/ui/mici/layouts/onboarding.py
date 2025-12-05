@@ -57,11 +57,11 @@ class DriverCameraSetupDialog(DriverCameraDialog):
 
 class TrainingGuideIntro(SetupTermsPage):
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
-    self._title_header = TermsHeader("welcome to openpilot", gui_app.texture("icons_mici/offroad_alerts/green_wheel.png", 60, 60))
+    super().__init__(continue_callback, continue_text=tr("continue"))
+    self._title_header = TermsHeader(tr("welcome to openpilot"), gui_app.texture("icons_mici/offroad_alerts/green_wheel.png", 60, 60))
 
-    self._dm_label = UnifiedLabel("Before we get on the road, let's review the " +
-                                  "functionality and limitations of openpilot.", 42,
+    self._dm_label = UnifiedLabel(tr("Before we get on the road, let's review the " +
+                                  "functionality and limitations of openpilot."), 42,
                                   FontWeight.ROMAN)
 
   @property
@@ -86,12 +86,12 @@ class TrainingGuideIntro(SetupTermsPage):
 
 class TrainingGuidePreDMTutorial(SetupTermsPage):
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
-    self._title_header = TermsHeader("driver monitoring setup", gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
+    super().__init__(continue_callback, continue_text=tr("continue"))
+    self._title_header = TermsHeader(tr("driver monitoring setup"), gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
 
-    self._dm_label = UnifiedLabel("Next, we'll ensure comma four is mounted properly.\n\nIf it does not have a clear view of the driver, " +
+    self._dm_label = UnifiedLabel(tr("Next, we'll ensure comma four is mounted properly.\n\nIf it does not have a clear view of the driver, " +
                                   "simply unplug and remount before continuing.\n\n" +
-                                  "NOTE: the driver camera will have a purple tint due to the IR illumination used for seeing at night.", 42,
+                                  "NOTE: the driver camera will have a purple tint due to the IR illumination used for seeing at night."), 42,
                                   FontWeight.ROMAN)
 
   def show_event(self):
@@ -122,7 +122,7 @@ class TrainingGuidePreDMTutorial(SetupTermsPage):
 class TrainingGuideDMTutorial(Widget):
   def __init__(self, continue_callback):
     super().__init__()
-    self._title_header = TermsHeader("fill the circle to continue", gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
+    self._title_header = TermsHeader(tr("fill the circle to continue"), gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
 
     self._original_continue_callback = continue_callback
 
@@ -179,11 +179,11 @@ class TrainingGuideRecordFront(SetupTermsPage):
       ui_state.params.put_bool("RecordFront", True)
       continue_callback()
 
-    super().__init__(on_continue, back_callback=on_back, back_text="no", continue_text="yes")
-    self._title_header = TermsHeader("improve driver monitoring", gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
+    super().__init__(on_continue, back_callback=on_back, back_text=tr("no"), continue_text=tr("yes"))
+    self._title_header = TermsHeader(tr("improve driver monitoring"), gui_app.texture("icons_mici/setup/green_dm.png", 60, 60))
 
-    self._dm_label = UnifiedLabel("Help improve driver monitoring by including your driving data in the training data set. " +
-                                  "Your preference can be changed at any time in Settings. Would you like to share your data?", 42,
+    self._dm_label = UnifiedLabel(tr("Help improve driver monitoring by including your driving data in the training data set. " +
+                                  "Your preference can be changed at any time in Settings. Would you like to share your data?"), 42,
                                   FontWeight.ROMAN)
 
   def show_event(self):
@@ -213,9 +213,9 @@ class TrainingGuideRecordFront(SetupTermsPage):
 
 class TrainingGuideAttentionNotice1(SetupTermsPage):
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
-    self._title_header = TermsHeader("not a self driving car", gui_app.texture("icons_mici/setup/warning.png", 60, 60))
-    self._warning_label = UnifiedLabel("THIS IS A DRIVER ASSISTANCE SYSTEM. A DRIVER ASSISTANCE SYSTEM IS NOT A SELF-DRIVING CAR.", 42,
+    super().__init__(continue_callback, continue_text=tr("continue"))
+    self._title_header = TermsHeader(tr("not a self driving car"), gui_app.texture("icons_mici/setup/warning.png", 60, 60))
+    self._warning_label = UnifiedLabel(tr("THIS IS A DRIVER ASSISTANCE SYSTEM. A DRIVER ASSISTANCE SYSTEM IS NOT A SELF-DRIVING CAR."), 42,
                                        FontWeight.ROMAN)
 
   @property
@@ -240,10 +240,10 @@ class TrainingGuideAttentionNotice1(SetupTermsPage):
 
 class TrainingGuideAttentionNotice2(SetupTermsPage):
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
-    self._title_header = TermsHeader("attention is required", gui_app.texture("icons_mici/setup/warning.png", 60, 60))
-    self._warning_label = UnifiedLabel("1. You must pay attention at all times.\n\n2. You must be ready to take over at any time."+
-                                       "\n\n3. You are fully responsible for driving the car.", 42,
+    super().__init__(continue_callback, continue_text=tr("continue"))
+    self._title_header = TermsHeader(tr("attention is required"), gui_app.texture("icons_mici/setup/warning.png", 60, 60))
+    self._warning_label = UnifiedLabel(tr("1. You must pay attention at all times.\n\n2. You must be ready to take over at any time."+
+                                       "\n\n3. You are fully responsible for driving the car."), 42,
                                        FontWeight.ROMAN)
 
   @property
@@ -268,10 +268,10 @@ class TrainingGuideAttentionNotice2(SetupTermsPage):
 
 class TrainingGuideDisengaging(SetupTermsPage):
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
-    self._title_header = TermsHeader("disengaging openpilot", gui_app.texture("icons_mici/setup/green_pedal.png", 60, 60))
-    self._warning_label = UnifiedLabel("You can disengage openpilot by either pressing the brake pedal or " +
-                                       "the cancel button on your steering wheel.", 42,
+    super().__init__(continue_callback, continue_text=tr("continue"))
+    self._title_header = TermsHeader(tr("disengaging openpilot"), gui_app.texture("icons_mici/setup/green_pedal.png", 60, 60))
+    self._warning_label = UnifiedLabel(tr("You can disengage openpilot by either pressing the brake pedal or " +
+                                       "the cancel button on your steering wheel."), 42,
                                        FontWeight.ROMAN)
 
   @property
@@ -298,13 +298,13 @@ class TrainingGuideConfidenceBall(SetupTermsPage):
   ANIMATION_PAUSE = 3.5
 
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="continue")
+    super().__init__(continue_callback, continue_text=tr("continue"))
     self._confidence_ball = ConfidenceBall(demo=True)
     self._start_time = 0.0
 
-    self._title_header = TermsHeader("confidence ball", gui_app.texture("icons_mici/setup/green_car.png", 60, 60))
-    self._warning_label = UnifiedLabel("The ball on the right communicates how confident openpilot " +
-                                       "is about the road scene at any given time.", 42,
+    self._title_header = TermsHeader(tr("confidence ball"), gui_app.texture("icons_mici/setup/green_car.png", 60, 60))
+    self._warning_label = UnifiedLabel(tr("The ball on the right communicates how confident openpilot " +
+                                       "is about the road scene at any given time."), 42,
                                        FontWeight.ROMAN)
 
   def show_event(self):
@@ -352,14 +352,14 @@ class TrainingGuideSteeringArc(SetupTermsPage):
   TORQUE_BAR_HEIGHT = 100
 
   def __init__(self, continue_callback):
-    super().__init__(continue_callback, continue_text="finish")
+    super().__init__(continue_callback, continue_text=tr("finish"))
     self._torque_bar = TorqueBar(demo=True)
     self._start_time = 0.0
 
-    self._title_header = TermsHeader("steering arc", gui_app.texture("icons_mici/offroad_alerts/green_wheel.png", 60, 60))
-    self._warning_label = UnifiedLabel("All cars limit the amount of steering that openpilot is able to apply. While driving, the " +
+    self._title_header = TermsHeader(tr("steering arc"), gui_app.texture("icons_mici/offroad_alerts/green_wheel.png", 60, 60))
+    self._warning_label = UnifiedLabel(tr("All cars limit the amount of steering that openpilot is able to apply. While driving, the " +
                                        "steering arc shows the current amount of force being applied in relation to the maximum available to openpilot. " +
-                                       "You may need to assist if you see the arc nearing its orange state.", 42,
+                                       "You may need to assist if you see the arc nearing its orange state."), 42,
                                        FontWeight.ROMAN)
 
   def show_event(self):
@@ -456,12 +456,12 @@ class TrainingGuide(Widget):
 class DeclinePage(Widget):
   def __init__(self, back_callback=None):
     super().__init__()
-    self._uninstall_slider = SmallSlider("uninstall openpilot", self._on_uninstall)
+    self._uninstall_slider = SmallSlider(tr("uninstall openpilot"), self._on_uninstall)
 
-    self._back_button = SmallButton("back")
+    self._back_button = SmallButton(tr("back"))
     self._back_button.set_click_callback(back_callback)
 
-    self._warning_header = TermsHeader("you must accept the\nterms to use openpilot",
+    self._warning_header = TermsHeader(tr("you must accept the\nterms to use openpilot"),
                                        gui_app.texture("icons_mici/setup/red_warning.png", 66, 60))
 
   def _on_uninstall(self):
@@ -494,13 +494,13 @@ class DeclinePage(Widget):
 
 class TermsPage(SetupTermsPage):
   def __init__(self, on_accept=None, on_decline=None):
-    super().__init__(on_accept, on_decline, "decline")
+    super().__init__(on_accept, on_decline, tr("decline"))
 
     info_txt = gui_app.texture("icons_mici/setup/green_info.png", 60, 60)
-    self._title_header = TermsHeader("scroll down to read &\n accept terms", info_txt)
+    self._title_header = TermsHeader(tr("scroll down to read &\n accept terms"), info_txt)
 
-    self._terms_label = UnifiedLabel("You must accept the Terms and Conditions to use openpilot. " +
-                                     "Read the latest terms at https://comma.ai/terms before continuing.", 36,
+    self._terms_label = UnifiedLabel(tr("You must accept the Terms and Conditions to use openpilot. " +
+                                     "Read the latest terms at https://comma.ai/terms before continuing."), 36,
                                      FontWeight.ROMAN)
 
   @property

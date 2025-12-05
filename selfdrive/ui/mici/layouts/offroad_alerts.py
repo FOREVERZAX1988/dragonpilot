@@ -245,7 +245,7 @@ class MiciOffroadAlerts(Widget):
     if update_alert_data:
       if update_available:
         # Default text
-        update_alert_data.text = "update available. go to comma.ai/blog to read the release notes."
+        update_alert_data.text = tr("update available. go to comma.ai/blog to read the release notes.")
 
         # Get new version description and parse version and date
         new_desc = self.params.get("UpdaterNewDescription") or ""
@@ -254,7 +254,7 @@ class MiciOffroadAlerts(Widget):
           parts = new_desc.split(" / ")
           if len(parts) > 3:
             version, date = parts[0], parts[3]
-            update_alert_data.text = f"update available\n openpilot {version}, {date}. go to comma.ai/blog to read the release notes."
+            update_alert_data.text = tr(f"update available\n openpilot {version}, {date}. go to comma.ai/blog to read the release notes.")
 
         update_alert_data.visible = True
         active_count += 1

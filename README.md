@@ -4,6 +4,18 @@
 
 # **🐲 dragonpilot - 賦予您的愛車「龍」之魂**
 
+## **关于PC端**
+如果您使用的是黑熊，则启动脚本需要加入：export TICI_HW=1，红熊则不需要，例如：
+```
+#!/bin/bash
+sudo chmod 777 /dev/bus/usb/*
+cd op &&
+source .venv/bin/activate &&
+export TICI_HW=1 &&
+USE_WEBCAM=1 ROAD_CAM=0 NO_DM=0 BIG=1 SHOW_FPS=1 system/manager/manager.py
+```
+
+
 **我們與您一同翱翔於更智慧、更貼心的駕駛旅程。**
 
 ## **👋 嘿, 朋友，歡迎您的到來！**
