@@ -837,6 +837,7 @@ FW_VERSIONS = {
       b'\xf1\x878V0906259H \xf1\x890002',
       b'\xf1\x878V0906259J \xf1\x890002',
       b'\xf1\x878V0906259K \xf1\x890001',
+      b'\xf1\x878V0906259K \xf1\x890002',
       b'\xf1\x878V0906264B \xf1\x890003',
       b'\xf1\x878V0907115B \xf1\x890007',
       b'\xf1\x878V0907404A \xf1\x890005',
@@ -852,6 +853,7 @@ FW_VERSIONS = {
       b'\xf1\x870D9300012L \xf1\x894521',
       b'\xf1\x870D9300013B \xf1\x894902',
       b'\xf1\x870D9300013B \xf1\x894931',
+      b'\xf1\x870D9300014Q \xf1\x895006',
       b'\xf1\x870D9300041N \xf1\x894512',
       b'\xf1\x870D9300043T \xf1\x899699',
       b'\xf1\x870DD300046  \xf1\x891604',
@@ -902,6 +904,26 @@ FW_VERSIONS = {
       b'\xf1\x875Q0907572G \xf1\x890571',
       b'\xf1\x875Q0907572H \xf1\x890620',
       b'\xf1\x875Q0907572P \xf1\x890682',
+    ],
+  },
+  CAR.AUDI_A4_MK4: {
+    (Ecu.engine, 0x7e0, None): [
+      b'\xf1\x878K5907551G \xf1\x890007',
+      b'\xf1\x8703L906018HT\xf1\x899977',
+    ],
+    (Ecu.transmission, 0x7e1, None): [
+      b'\xf1\x878K5927156D \xf1\x890003',
+      b'\xf1\x878K9927155A \xf1\x890003',
+    ],
+    (Ecu.srs, 0x715, None): [
+      b'\xf1\x878K0959655N \xf1\x890610\xf1\x82\x040R0D0506',
+    ],
+    (Ecu.eps, 0x712, None): [
+      b'\xf1\x878K0909144J \xf1\x890509\xf1\x82\x01\n\x1a',
+      b'\xf1\x878K0909144F \xf1\x890507\xf1\x82\x01\x09\xea',
+    ],
+    (Ecu.fwdRadar, 0x757, None): [
+      b'\xf1\x872Q0907572M \xf1\x890233',
     ],
   },
   CAR.AUDI_Q2_MK1: {
@@ -964,6 +986,59 @@ FW_VERSIONS = {
       b'\xf1\x872Q0907572AA\xf1\x890396',
       b'\xf1\x872Q0907572R \xf1\x890372',
       b'\xf1\x872Q0907572T \xf1\x890383',
+    ],
+  },
+  CAR.AUDI_Q5_MK1: {
+    (Ecu.engine, 0x7e0, None): [
+      b'\xf1\x878R0907115N \xf1\x890006',
+      b'\xf1\x878R0907551F \xf1\x890007',
+    ],
+    (Ecu.transmission, 0x7e1, None): [
+      b'\xf1\x878R0927158D \xf1\x891010',
+      b'\xf1\x878R0927158AM\xf1\x891003',
+    ],
+    (Ecu.srs, 0x715, None): [
+      b'\xf1\x878R0959655F \xf1\x890610\xf1\x82\x050304010402',
+    ],
+    (Ecu.eps, 0x712, None): [
+      b'\xf1\x878R0909144R \xf1\x890511\xf1\x82\x01\n\x1a',
+      b'\xf1\x878R0909144F \xf1\x890507\xf1\x82\x01\t\xe6',
+    ],
+    (Ecu.fwdRadar, 0x757, None): [
+      b'\xf1\x878R0907561A\x00\xf1\x890410\xf1\x80100',
+    ],
+  },
+  CAR.PORSCHE_MACAN_MK1: {
+    (Ecu.engine, 0x7e0, None): [
+      b'\xf1\x8795B906259  \xf1\x890005',
+      b'\xf1\x8795B906259BJ\xf1\x890001',
+      b'\xf1\x8795B90652013\xf1\x893485',
+      b'\xf1\x8795B90654002\xf1\x893495',
+      b'\xf1\x8795B907551D \xf1\x890006',
+    ],
+    (Ecu.transmission, 0x7e1, None): [
+      b'\xf1\x8795B927156AH\xf1\x890014',
+      b'\xf1\x8795B927156CE\xf1\x890022',
+      b'\xf1\x8795B927156JH\xf1\x890001',
+      b'\xf1\x8795B927156KK\xf1\x890001',
+      b'\xf1\x8795B927156R \xf1\x890021',
+    ],
+    (Ecu.srs, 0x715, None): [
+      b'\xf1\x8795B959655D \xf1\x890110\xf1\x82\x05064702D312',
+      b'\xf1\x8795B959655F \xf1\x890130\xf1\x82\x05065Q033513',
+      b'\xf1\x8795B959655F \xf1\x890130\xf1\x82\x050682033514',
+      b'\xf1\x8795B959655G \xf1\x890150\xf1\x82\x0506B1033514',
+      b'\xf1\x8795B959655G \xf1\x890150\xf1\x82\x0506CJ02D417',
+    ],
+    (Ecu.eps, 0x712, None): [
+      b'\xf1\x8795B909144B \xf1\x890902\xf1\x82\x01m`',
+      b'\xf1\x8795B909144K \xf1\x891902\xf1\x82\x02\x04#\x04#',
+      b'\xf1\x8795B909144K \xf1\x891902\xf1\x82\x02\x04/\x04/',
+    ],
+    (Ecu.fwdRadar, 0x757, None): [
+      b'\xf1\x8795B907567B\x00\xf1\x890800\xf1\x82108',
+      b'\xf1\x8795B907567G\x00\xf1\x890410\xf1\x82104',
+      b'\xf1\x8795B907567J \xf1\x890440\xf1\x82104',
     ],
   },
   CAR.SEAT_ATECA_MK1: {

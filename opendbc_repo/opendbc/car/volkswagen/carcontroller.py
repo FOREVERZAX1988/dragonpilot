@@ -4,7 +4,8 @@ from opendbc.car import Bus, DT_CTRL, structs
 from opendbc.car.lateral import apply_driver_steer_torque_limits
 from opendbc.car.common.conversions import Conversions as CV
 from opendbc.car.interfaces import CarControllerBase
-from opendbc.car.volkswagen import mqbcan, pqcan
+#ADD MLB
+from opendbc.car.volkswagen import mlbcan, mqbcan, pqcan
 from opendbc.car.volkswagen.values import CanBus, CarControllerParams, VolkswagenFlags
 
 VisualAlert = structs.CarControl.HUDControl.VisualAlert
@@ -16,15 +17,23 @@ class CarController(CarControllerBase):
     super().__init__(dbc_names, CP)
     self.CCP = CarControllerParams(CP)
     self.CAN = CanBus(CP)
-    self.CCS = pqcan if CP.flags & VolkswagenFlags.PQ else mqbcan
+    #self.CCS = pqcan if CP.flags & VolkswagenFlags.PQ else mqbcan
     self.packer_pt = CANPacker(dbc_names[Bus.pt])
     self.aeb_available = not CP.flags & VolkswagenFlags.PQ
+    #NEW ADD MLB
+    if CP.flags & VolkswagenFlags.PQ:
+      self.CCS = pqcan
+    elif CP.flags & VolkswagenFlags.MLB:
+      self.CCS = mlbcan
+    else:
+      self.CCS = mqbcan
 
     self.apply_torque_last = 0
     self.gra_acc_counter_last = None
     self.eps_timer_soft_disable_alert = False
     self.hca_frame_timer_running = 0
     self.hca_frame_same_torque = 0
+    #DP NEW ADD
     self._dp_vag_a0_sng = bool(self.CP.flags & VolkswagenFlags.A0SnG)
     self.dp_vag_pq_steering_patch = 7 if CP.flags & VolkswagenFlags.PQSteeringPatch else 5
     self.dp_avoid_eps_lockout = CP.flags & VolkswagenFlags.AVOID_EPS_LOCKOUT

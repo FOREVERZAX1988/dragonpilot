@@ -10,6 +10,7 @@ class CarInterface(CarInterfaceBase):
   CarController = CarController
 
   @staticmethod
+#DP新增参数:dp_params
   def _get_params(ret: structs.CarParams, candidate: CAR, fingerprint, car_fw, alpha_long, is_release, dp_params, docs) -> structs.CarParams:
     ret.brand = "volkswagen"
     ret.radarUnavailable = True
@@ -37,6 +38,15 @@ class CarInterface(CarInterfaceBase):
       # Panda ALLOW_DEBUG firmware required.
       # ret.dashcamOnly = True
 
+#ADD MLB START
+    elif ret.flags & VolkswagenFlags.MLB:
+      # Set global MLB parameters
+      safety_configs = [get_safety_config(structs.CarParams.SafetyModel.volkswagenMlb)]
+      ret.enableBsm = 0x30F in fingerprint[0]  # SWA_01
+      ret.networkLocation = NetworkLocation.gateway
+      # ret.dashcamOnly = True  # Pending HCA timeout fix, safety validation, harness termination, install procedure
+#ADD MLB END
+
     else:
       # Set global MQB parameters
       safety_configs = [get_safety_config(structs.CarParams.SafetyModel.volkswagen)]
@@ -62,7 +72,9 @@ class CarInterface(CarInterfaceBase):
     # Global lateral tuning defaults, can be overridden per-vehicle
 
     ret.steerLimitTimer = 0.4
-    if ret.flags & VolkswagenFlags.PQ:
+    #ADD MLB
+    #if ret.flags & VolkswagenFlags.PQ:
+    if ret.flags & VolkswagenFlags.PQ or ret.flags & VolkswagenFlags.MLB:
       ret.steerActuatorDelay = 0.2
       CarInterfaceBase.configure_torque_tune(candidate, ret.lateralTuning)
     else:
@@ -83,6 +95,12 @@ class CarInterface(CarInterfaceBase):
       if ret.transmissionType == TransmissionType.manual:
         ret.minEnableSpeed = 4.5
 
+    # Per-vehicle overrides
+#ADD MLB-MACAN START
+    if candidate == CAR.PORSCHE_MACAN_MK1:
+      ret.steerActuatorDelay = 0.07
+#ADD MLB-MACAN END
+
     ret.pcmCruise = not ret.openpilotLongitudinalControl
     ret.stopAccel = -0.55
     ret.vEgoStarting = 0.1
@@ -94,6 +112,7 @@ class CarInterface(CarInterfaceBase):
       safety_configs.insert(0, get_safety_config(structs.CarParams.SafetyModel.noOutput))
     ret.safetyConfigs = safety_configs
 
+#DP新增-起点：
     if dp_params & structs.DPFlags.VagA0SnG:
       ret.flags |= VolkswagenFlags.A0SnG.value
 
@@ -102,5 +121,6 @@ class CarInterface(CarInterfaceBase):
 
     if dp_params & structs.DPFlags.VagAvoidEPSLockout:
       ret.flags |= VolkswagenFlags.AVOID_EPS_LOCKOUT.value
+#DP新增-终点。
 
     return ret
