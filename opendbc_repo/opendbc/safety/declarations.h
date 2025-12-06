@@ -33,6 +33,8 @@
 #define SAFETY_PSA 31U
 #define SAFETY_RIVIAN 33U
 #define SAFETY_VOLKSWAGEN_MEB 34U
+// 新增：大众MLB平台安全模型（无数值冲突，35U为可用唯一值）
+#define SAFETY_VOLKSWAGEN_MLB 35U
 
 #define GET_BIT(msg, b) ((bool)!!(((msg)->data[((b) / 8U)] >> ((b) % 8U)) & 0x1U))
 #define GET_FLAG(value, mask) (((__typeof__(mask))(value) & (mask)) == (mask)) // cppcheck-suppress misra-c2012-1.2; allow __typeof__
@@ -344,3 +346,5 @@ extern const safety_hooks volkswagen_mqb_hooks;
 extern const safety_hooks volkswagen_pq_hooks;
 extern const safety_hooks rivian_hooks;
 extern const safety_hooks psa_hooks;
+//新增MLB平台
+extern const safety_hooks volkswagen_mlb_hooks;
